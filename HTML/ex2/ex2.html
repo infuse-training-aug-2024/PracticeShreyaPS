@@ -2,16 +2,15 @@
     <head>
         <title>digital clock</title>
         <link rel="stylesheet" href="ex2.css">
+       
     </head>
     <body>
-        <div class="clock">
-            <h1>hello</h1>
-            <p id="time"></p>
+        <div class="container" id="container">
+            <div class="toggle">
+                <button onclick="toggle()"> change mode</button>
+            </div>
+            <div class="clock" id="clock"></div>
+            <script src="ex2.js"></script>
         </div>
-        <script>
-            const date =new Date();
-
-            document.getElementById("time").innerHTML=date.getHours;
-        </script>
     </body>
 </html>

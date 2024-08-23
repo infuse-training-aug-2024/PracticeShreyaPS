@@ -1,5 +1,26 @@
-.clock{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+.clock {
+    width: 500px;
+    height: 50px;
+    border: 0.2vw solid seashell;
+    background: black;
+    border-radius: 2vmin;
+    margin: 4px;
+    text-shadow: 2px 2px 1px rgb(36, 35, 35);
+    color: azure;
+  }
+  
+  .container {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+  }
+
+  .dark-container{
+    background-color: black;
+  }
+
+  .dark-clock{
+    background-color: aliceblue;
+    color: black;
+  }
+  
