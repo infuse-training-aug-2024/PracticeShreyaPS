@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>digital clock</title>
+        <link rel="stylesheet" href="ex2.css">
+    </head>
+    <body>
+        <div class="clock">
+            <h1>hello</h1>
+            <p id="time"></p>
+        </div>
+        <script>
+            const date =new Date();
+
+            document.getElementById("time").innerHTML=date.getHours;
+        </script>
+    </body>
+</html>
