@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  .container {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 20% auto;
+  }
+  
+  aside {
+    border-right: 1px solid rgb(205, 205, 205);
+    margin-left: 15px;
+  }
+  
+  .um-logo {
+    padding: 16px 24px;
+    border-bottom: 1px solid rgb(205, 205, 205);
+    width: 100%;
+  }
+  
+  .um-user{
+    display: flex;
+  }
+
+  .um-user span{
+    display: block;
+    margin-left: 10px;
+  }
+
+  .um-user-name{
+    color: rgb(0, 113, 147);
+  }
+
+  .um-user-email {
+    font-size: x-small;
+  }
+  
+  .um-user img {
+    width: 40px;
+  }
+  
+  .test-designer {
+    width: 50%;
+    height: 200px;
+  }
+
+  .um-navitems__main li{
+    list-style: none;
+    padding: 15px 15px 15px 0px;
+    color: rgb(0, 113, 147);
+    
+  }
+
+  .um-navitems__main{
+    list-style: none;
+    padding: 0px 
+    
+  }
+  .um-navitems__main li i{
+    padding-right: 10px;
+  }
+  .um-navitems__secondary li{
+    list-style: none;
+    padding: 15px 15px 15px 0px;
+    color: rgb(0, 113, 147);
+    
+  }
+
+  .um-navitems__secondary{
+    list-style: none;
+    padding: 0px 
+    
+  }
+  .um-navitems__secondary li i{
+    padding-right: 10px;
+  }
+  .nav{
+    border-bottom: 1px solid rgb(205, 205, 205);
+  }
+
+  .
