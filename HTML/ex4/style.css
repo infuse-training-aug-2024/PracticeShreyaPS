@@ -42,8 +42,9 @@
   }
   
   .test-designer {
-    width: 50%;
+    width: 100%;
     height: 200px;
+    background-color: rgb(225, 225, 225);
   }
 
   .um-navitems__main li{
@@ -80,4 +81,113 @@
     border-bottom: 1px solid rgb(205, 205, 205);
   }
 
-  .
+  .test-data{
+    border: 2px solid; /* Defines the border width and style */
+    border-color: rgb(0, 113, 147); /* Sets the border color */
+    margin: 15px 5px 5px 5px;
+    background-color: rgb(0, 113, 147);
+    color: aliceblue;
+    align-items: center; 
+}
+
+.test-data > span:first-child {
+  background-color: black;
+  color: aliceblue;
+  padding: 2px;
+}
+.um-test-name  {
+  background-color: rgb(0, 113, 147);
+  color: aliceblue;
+  padding: 2px;
+  margin:0 4px 0 3px;
+}
+
+.test-data > .bi-x {
+  float: right; /* Pushes the icon to the far right */
+}
+
+.test-properties{
+  background-color:rgb(1, 149, 194) ;
+}
+.test-properties >span{
+  padding-left: 2px;
+}
+.form-properties{
+  background-color: white;
+  color: rgb(0, 113, 147);
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.form-properties label select i{
+  margin-left: 4px;
+}
+.description{
+  display:grid;
+  justify-content: space-between;
+  flex: 0 0 40%
+}
+.details{
+  flex: 1; /* Takes up the remaining space on the left */
+  /* margin-right: 60px */
+}
+
+.test-main {
+  display: flex;
+  align-items: flex-start; /* Ensures the vertical starting point is the same */
+  margin-top: 3px;
+  background-color: white;
+  color: black;
+  height: 100%;
+}
+
+.test-flowchart{
+  background-color:rgb(1, 149, 194) ;
+  color: black;
+  width: 70%;
+  border: 2px solid; /* Defines the border width and style */
+  border-color: rgb(0, 113, 147); 
+}
+
+.test-flowchart > span{
+  background-color:rgb(1, 149, 194) ;
+  color: white;
+  width:100%;
+}
+
+.options{
+  background-color: white;
+  color: grey;
+}
+.options i{
+  margin-right: 10px;
+}
+
+.test-variables {
+  background-color: rgb(1, 149, 194);
+  color: white;
+  
+}
+.test-variables > .bi-plus{
+  float: right; 
+}
+.table-header{
+  background-color: white;
+  color: rgb(1, 149, 194);
+  height: 90px;
+}
+.table-header span{
+  margin-right: 7px;
+}
+
+.test-parameters {
+  background-color: rgb(1, 149, 194);
+  color: white;
+  
+}
+.test-parameters > .bi-plus{
+  float: right; 
+}
+.test-main > .test-data{
+  float: right;
+}
