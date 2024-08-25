@@ -1,3 +1,36 @@
+.search-container{
+  display: flex;
+  margin: 10px;
+}
+input{
+  height: var(--height);
+  font-family: var(--font-fam);
+  border: 2px solid;
+  color: var(--color-dark);
+  font-size: 1.8rem;
+  
+}
+input[type="search"] {
+  outline: 0; 
+  width: 100%;
+  background: var(--color-light);
+  padding: 0 1.6rem;
+  border-radius: var(--rad);
+  appearance: none; 
+  transition: all var(--dur) var(--bez);
+  transition-property: width, border-radius;
+  z-index: 1;
+  position: relative;
+}
+
+input:not(:placeholder-shown) {
+  border-radius: var(--rad) 0 0 var(--rad);
+  width: calc(100% - var(--btn-width));
+  + button {
+    display: block;
+  }
+}
+
 .header {
     overflow: hidden;
     background-color: #f1f1f1;
@@ -28,7 +61,13 @@
   
   /* Float the link section to the right */
   .header-right {
-    float: right;
+    margin: 0 auto;
+  }
+
+  .header-right > input[type=text] {
+    padding: 6px;
+    border: none;
+    font-size: 17px;
   }
   
   /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */

@@ -7,8 +7,9 @@ const user = {
 
 let {name, designation,company,hobbies}=user;
 const len=hobbies.length;
+console.log(len);
 const firstSetHobbies=hobbies.slice(0,len-1).join(",");
-const LastHobbies=hobbies.slice(2);
+const LastHobbies=hobbies.slice(len-1);
 
 const printUserProfile = () => {
     // Piyush Sharma is a Senior Software Engineer at Infuse Consulting. He likes Reading, Listening to music and Collecting stamps
