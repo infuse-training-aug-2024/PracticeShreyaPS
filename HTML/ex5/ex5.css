@@ -1,16 +1,24 @@
 .search-container{
   display: flex;
-  margin: 10px;
+  margin-top: 10px;
+  background-color: black;
 }
-input{
+input, button{
   height: var(--height);
   font-family: var(--font-fam);
   border: 2px solid;
   color: var(--color-dark);
   font-size: 1.8rem;
-  
+  margin: 0 auto;
 }
-input[type="search"] {
+
+button{
+  background-color: #ae0000;
+  color: #fff;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+input[type="search"]{
   outline: 0; 
   width: 100%;
   background: var(--color-light);
@@ -21,6 +29,8 @@ input[type="search"] {
   transition-property: width, border-radius;
   z-index: 1;
   position: relative;
+  margin-top: 10px;
+  color: antiquewhite;
 }
 
 input:not(:placeholder-shown) {
@@ -33,41 +43,50 @@ input:not(:placeholder-shown) {
 
 .header {
     overflow: hidden;
-    background-color: #f1f1f1;
+    background-color: #ae0000;
     padding: 20px 10px;
+    height: 100px;
   }
+ 
+  
   
   /* Style the header links */
   .header a input {
     float: left;
-    color: black;
+    color: rgb(255, 255, 255);
     text-align: center;
     padding: 12px;
     text-decoration: none;
     font-size: 18px;
     line-height: 25px;
     border-radius: 4px;
+    margin-top: 10px;
   }
   
   /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
   .header a.logo {
-    font-size: 25px;
-    font-weight: bold;
-    color: black;
+    
+    color: #fff;
     text-decoration: none;
-
+    font-family: "New Amsterdam", sans-serif;
+  font-weight: 400px;
+  font-style:normal;
+  font-size: 100px;
   }
   
   
   /* Float the link section to the right */
   .header-right {
     margin: 0 auto;
+    
   }
+  
 
-  .header-right > input[type=text] {
+  .header-right > input[type=text] , button {
     padding: 6px;
     border: none;
     font-size: 17px;
+    color: antiquewhite;
   }
   
   /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
@@ -81,21 +100,43 @@ input:not(:placeholder-shown) {
       float: none;
     }
   }
-
-.main{
+  .content {
     display: flex;
+    height: 100vh; /* Full viewport height */
+    width: 100%;
+    background-color: black;
+}
+
+/* Main content section */
+.main {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive columns */
+    gap: 10px; /* Space between cards */
+    padding: 10px;
+    overflow-y: auto;
+    flex: 1 1 80%; /* Flex-grow, flex-shrink, flex-basis */
+}
+
+/* Iframe panel */
+#movie-iframe {
+    width: 20%; /* Width of the iframe panel */
+    height: 100%;
+    border: none;
+    flex-shrink: 0; /* Prevent the iframe from shrinking */
 }
 
   .card {
     /* Add shadows to create the "card" effect */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-    margin: 10px;
+    margin: 30px;
+    max-width: 300px;
+    background-color: #fff;
+    height: 500px;
   }
-  
   /* On mouse-over, add a deeper shadow */
   .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 10px 20px 0 rgba(0,0,0,0.2);
   }
   
   /* Add some padding inside the card container */
@@ -111,41 +152,14 @@ input:not(:placeholder-shown) {
 
  */
 
-.toggle-button {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    z-index: 1000; /* Make sure the button stays on top */
-}
+
 .main, .header{
     padding: 20px;
     transition: margin-right 0.3s ease;
 }
-.side-panel {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 300px;
-    height: 100%;
-    background-color: #f8f9fa;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
-    transition: right 0.3s ease;
-    z-index: 999; /* Make sure the panel stays on top */
-}
 
-.side-panel iframe {
-    width: 100%;
-    height: 100%;
-}
-
-.side-panel.open {
-    right: 0;
-}
-.main.shifted , .header.shifted{
-    margin-right: 300px; /* Same width as the side panel */
+.side-panel{
+  color: #fff;
+  border: solid 2px;
+  border-color: #fff;
 }

@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Matemasie&family=New+Amsterdam&display=swap');
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMBD Movies</title>
+    <title >OMBD Movies</title>
     <link rel="stylesheet" href="ex5.css">
+    
 </head>
 <body>
     <div class="header">
@@ -13,31 +17,18 @@
       
   <div class="search-container">
     <div class="header-right">
-      <input id="search" type="search" placeholder="Search..." autofocus required />
+      <input id="search-input" type="search" placeholder="Search..." autofocus required />
+      <button id="search-button" type="submit">GO!</button>
     </div>
   </div>
-      
-      <div class="main">
-        <div class="card">
-            <img src="../ex1/new-usemango-logo.png" alt="Avatar" style="width:100%">
-            <div class="container">
-              <h4><b>John Doe</b></h4>
-              <p>Architect & Engineer</p>
-            </div>
-          </div>
-          <div class="card">
-            <img src="../ex1/new-usemango-logo.png" alt="Avatar" style="width:100%">
-            <div class="container">
-              <h4><b>John Doe</b></h4>
-              <p>Architect & Engineer</p>
-            </div>
-        </div>
-        <button id="toggle-button" class="toggle-button">Open Panel</button>
-        <div id="side-panel" class="side-panel">
-         <iframe id="content-iframe" src=
-         "https://media.geeksforgeeks.org/wp-content/uploads/20240206111438/uni2.html" frameborder="0"></iframe>
-        </div>
+      <div class="content">
+        <div class="main" id="main"> </div>
+        
+        <iframe id="movie-iframe"  src=""></iframe>
       </div>
+      <button id="load-more-button" >Load More</button>
+ 
+
     <script src="ex5.js"></script>
 </body>
 </html>
