@@ -68,7 +68,6 @@ async function  getMovies(url, sortOption){
 
             const loadMovies = () => {
                 
-
            // loadMoreButton.style.display = 'none'; // Hide initially
                 const nextMovies = sortedMovies.slice(currentIndex, currentIndex + moviesPerPage);
                 console.log("next movies:",nextMovies);
