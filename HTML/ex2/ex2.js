@@ -17,6 +17,16 @@ function toggle()
 {
     var element = document.getElementById("container");
     element.classList.toggle("dark-container");
+    // Assuming you have a reference to the button element
+const button = document.querySelector('button');
+
+// Toggle the text content based on the current text
+if (button.textContent === 'Change to Light mode') {
+  button.textContent = 'Change to Dark mode';
+} else {
+  button.textContent = 'Change to Light mode';
+}
+
     var element2 = document.getElementById("clock");
     element2.classList.toggle("dark-clock");
 }

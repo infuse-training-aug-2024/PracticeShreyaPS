@@ -2,7 +2,7 @@ const user = {
     name: "Piyush Sharma",
     designation: "Senior Software Engineer",
     company: "Infuse Consulting",
-    hobbies: ["Reading", "Listening to music", "Collecting stamps"]
+    hobbies: [ "Reading","Listening to music", "Collecting stamps"]
 }
 
 let {name, designation,company,hobbies}=user;

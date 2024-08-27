@@ -1,9 +1,13 @@
 .clock {
     color: rgb(0, 0, 0);
+    font-family: 'Times New Roman', Times, serif;
+  font-size: 50px;
+  margin-top: 30%;
   }
   
   .container {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     place-items: center;
     height: 100vh;
   }
@@ -14,6 +18,11 @@
 
   .dark-clock{
     color: rgb(255, 255, 255);
+    font-family: 'Times New Roman', Times, serif;
+  font-size: 50px;
   }
- 
+ .button{
+  padding: 10px;
+  margin-top: 50px;
+ }
   
