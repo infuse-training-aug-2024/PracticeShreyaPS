@@ -30,7 +30,7 @@ body {
   /* img{
     place-items: center;
   } */
-  div.card::before {
+.card::before {
     content:url(new-usemango-logo.png);
     position: absolute;
     top: 50%;

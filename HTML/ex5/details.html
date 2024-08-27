@@ -6,12 +6,18 @@
     <title>Movie Details</title>
     <link rel="stylesheet" src="ex5.css">
     <style>
-
+        .heading{
+            display: flex;
+             justify-content: center;
+             color: aliceblue;
+        }
     </style>
 </head>
 <body>
+    <div class="heading">
+        <h1> MOVIE INFO</h1>
+    </div>
     <div id="movie-title" style="color: white; border: 1px solid white;"></div>
-
     <script>
     window.addEventListener('load', () => {
         const params = new URLSearchParams(window.location.search);

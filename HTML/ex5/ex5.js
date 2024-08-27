@@ -1,33 +1,30 @@
 let sortOption = 'ascending'; // Default sort option
-let currentIndex = 0; // Keep track of the current index globally
-let sortedMovies = []; // Store sorted movies globally
+let currentIndex = 0; // used for load more function
+let sortedMovies = []; // Stores sorted movies globally
 const moviesPerPage = 3; // Number of movies to show per load
+const apiKey = '262e0edd'; // api key
 
-document.addEventListener("DOMContentLoaded", async function () {
-    const apiKey = '262e0edd'; // Replace with your OMDb API key
+document.addEventListener("DOMContentLoaded", async function () { // to load default movie results
     const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent('blade')}`;
     await getMovies(url, sortOption);
 });
 
 const sortSelect = document.getElementById('sort');
-sortSelect.addEventListener('change', async () => {
+sortSelect.addEventListener('change', async () => { //implementing sort by year
     sortOption = sortSelect.value;
     console.log(sortOption);
     query = document.getElementById('search-input').value || 'blade';
-    const apiKey = '262e0edd'; // Replace with your OMDb API key
     const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(query)}`;
     await getMovies(url, sortOption);
 });
 
-document.getElementById('search-button').addEventListener('click', async function () {
+document.getElementById('search-button').addEventListener('click', async function () { //passing query for search input
     query = document.getElementById('search-input').value;
-    const apiKey = '262e0edd'; // Replace with your OMDb API key
     const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(query)}`;
     await getMovies(url, sortOption);
 });
 
-async function handleCardClick(movieId) {
-    const apiKey = '262e0edd'; // Replace with your OMDb API key
+async function handleCardClick(movieId) { // to display i frame contents on card click
     const url = `http://www.omdbapi.com/?apikey=${apiKey}&i=${encodeURIComponent(movieId)}&plot=full`;
 
     try {
@@ -74,7 +71,7 @@ async function getMovies(url, sortOption) {
     }
 }
 
-function loadMovies() {
+function loadMovies() { // loads content based on inputs
     const movieList = document.getElementById('main');
     const loadMoreButton = document.getElementById('load-more-button');
 
@@ -119,16 +116,15 @@ function loadMovies() {
     currentIndex += moviesPerPage;
 
     if (currentIndex >= sortedMovies.length) {
-        loadMoreButton.style.display = 'none'; // Hide button when all movies are loaded
+        loadMoreButton.style.display = 'none'; 
     } else {
-        loadMoreButton.style.display = 'block'; // Show button
+        loadMoreButton.style.display = 'block'; 
     }
 }
 
-// Attach the event listener only once, outside the getMovies function
-document.getElementById('load-more-button').addEventListener('click', loadMovies);
+document.getElementById('load-more-button').addEventListener('click', loadMovies); //attached outside get movies 
 
-async function sortMovie(data, option) {
+async function sortMovie(data, option) { //sorts movies
     let sortedMovies;
 
     if (option === "ascending") {
