@@ -88,7 +88,20 @@ input:not(:placeholder-shown) {
     font-size: 17px;
     color: antiquewhite;
   }
+  .header-right #search-button{
+    justify-content: center;
+    margin: 5px auto;
+  }
   
+  .sort-div{
+    display: flex;
+    color: #fff;
+    background-color: #ae0000;
+    margin: 5px auto;
+    justify-content: center;
+    width: 160px;
+    padding: 5px;
+  }
   /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
   @media screen and (max-width: 500px) {
     .header a input {
@@ -113,26 +126,29 @@ input:not(:placeholder-shown) {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive columns */
     gap: 10px; /* Space between cards */
     padding: 10px;
-    overflow-y: auto;
-    flex: 1 1 80%; /* Flex-grow, flex-shrink, flex-basis */
+    overflow: auto;
+    flex: 1 1 70%; /* Flex-grow, flex-shrink, flex-basis */
 }
+
 
 /* Iframe panel */
 #movie-iframe {
-    width: 20%; /* Width of the iframe panel */
+    width: 30%; /* Width of the iframe panel */
     height: 100%;
     border: none;
     flex-shrink: 0; /* Prevent the iframe from shrinking */
+    overflow: hidden;
 }
 
   .card {
     /* Add shadows to create the "card" effect */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow:  4px 0px 4px rgba(255, 255, 255, 0.358);
     transition: 0.3s;
     margin: 30px;
     max-width: 300px;
     background-color: #fff;
-    height: 500px;
+    height: 400px;
+    position: relative;
   }
   /* On mouse-over, add a deeper shadow */
   .card:hover {
@@ -162,4 +178,31 @@ input:not(:placeholder-shown) {
   color: #fff;
   border: solid 2px;
   border-color: #fff;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  color: white; /* Text color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease; /* Smooth transition */
+}
+
+.card:hover .overlay {
+  opacity: 1; /* Show overlay on hover */
+}
+
+.overlay-text {
+  text-align: center;
+  font-size: 18px;
+  padding: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  font-style: oblique;
 }

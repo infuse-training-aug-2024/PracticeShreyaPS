@@ -1,83 +1,211 @@
+document.addEventListener("DOMContentLoaded", async function() {
+    const apiKey = '262e0edd'; // Replace with your OMDb API key
+    const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent('blade')}`;
 
-const apiKey = 'http://www.omdbapi.com/?i=tt3896198&apikey=262e0edd'; // Replace with your OMDb API key
-let currentPage = 1;
-let movieData = [];
-
-const fetchMovies = async (page = 1) => {
     try {
-        const response = await fetch(`https://www.omdbapi.com/?s=batman&apikey=${apiKey}&page=${page}`);
+        const response = await fetch(url);
         const data = await response.json();
+        const movieList = document.getElementById('main');
+        movieList.innerHTML = ''; // Clear previous results
+
         if (data.Response === 'True') {
-            movieData = [...movieData, ...data.Search];
-            displayMovies(movieData);
+            const sortedMovies = data.Search.sort((a, b) => {
+                return parseInt(b.Year) - parseInt(a.Year);
+            });
+            const moviesPerPage = 3; // Number of movies to show per load
+            let currentIndex = 0;
+            const loadMoreButton = document.getElementById('load-more-button');
+
+            const loadMovies = () => {
+                const nextMovies = sortedMovies.slice(currentIndex, currentIndex + moviesPerPage);
+                console.log("next movies:", nextMovies);
+
+                nextMovies.forEach(movie => {
+                    // Create card div
+                    const cardDiv = document.createElement('div');
+                    cardDiv.className = 'card';
+                    cardDiv.style.marginTop = '120px';
+                    cardDiv.setAttribute('data-id', movie.imdbID);
+
+                    // Create movie title and year
+                    const description = document.createElement('h1');
+                    description.innerHTML = `${movie.Title} (${movie.Year})`;
+                    description.style.height = '100px';
+                    cardDiv.appendChild(description);
+
+                    // Create movie image
+                    const img = document.createElement('img');
+                    img.src = movie.Poster !== 'N/A' ? movie.Poster : 'path/to/default-image.png';
+                    img.alt = movie.Title;
+                    img.style.width = '100%';
+                    img.style.height = '300px';
+                    cardDiv.appendChild(img);
+
+                    // Create overlay
+                    const overlay = document.createElement('div');
+                    overlay.className = 'overlay';
+                    const overlayText = document.createElement('div');
+                    overlayText.className = 'overlay-text';
+                    overlayText.textContent = "Click to see more";
+                    overlay.style.fontStyle="oblique";
+                    overlay.appendChild(overlayText);
+                    cardDiv.appendChild(overlay);
+
+                    // Add card to movie list
+                    movieList.appendChild(cardDiv);
+
+                    // Add click event to card
+                    cardDiv.addEventListener('click', async function() {
+                        const movieId = this.getAttribute('data-id');
+                        await handleCardClick(movieId);
+                    });
+                });
+
+                currentIndex += moviesPerPage;
+
+                if (currentIndex >= sortedMovies.length) {
+                    loadMoreButton.style.display = 'none'; // Hide button when all movies are loaded
+                } else {
+                    loadMoreButton.style.display = 'block'; // Show button
+                }
+            };
+
+            loadMovies(); // Load initial set of movies
+            loadMoreButton.addEventListener('click', loadMovies); // Load more on button click
+
+        } else {
+            movieList.innerHTML = '<h1>No results found</h1>';
         }
     } catch (error) {
-        console.error('Error fetching movies:', error);
+        console.error('Error fetching data:', error);
     }
-};
+});
 
-const displayMovies = (movies) => {
-    const movieCards = document.getElementById('movie-cards');
-    movieCards.innerHTML = '';
 
-    movies.forEach((movie) => {
-        const card = `
-            <div class="movie-card">
-                <div class="movie-poster">
-                    <img src="${movie.Poster}" alt="${movie.Title}">
-                </div>
-                <div class="movie-info">
-                    <div class="movie-title">${movie.Title}</div>
-                    <div class="movie-meta">${movie.Year} | ${movie.Type}</div>
-                    <button onclick="viewDetails('${movie.imdbID}')">View Details</button>
-                </div>
-            </div>
-        `;
-        movieCards.insertAdjacentHTML('beforeend', card);
-    });
-};
 
-const viewDetails = async (imdbID) => {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.getElementById('search-button').addEventListener('click', async function() {
+    const query = document.getElementById('search-input').value;
+    const apiKey = '262e0edd'; // Replace with your OMDb API key
+    const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(query)}`;
+
     try {
-        const response = await fetch(`https://www.omdbapi.com/?i=${imdbID}&apikey=${apiKey}&plot=full`);
-        const movie = await response.json();
-        const iframe = document.getElementById('movie-details');
-        iframe.style.display = 'block';
-        iframe.srcdoc = `
-            <h2>${movie.Title}</h2>
-            <p><strong>Year:</strong> ${movie.Year}</p>
-            <p><strong>Rated:</strong> ${movie.Rated}</p>
-            <p><strong>Released:</strong> ${movie.Released}</p>
-            <p><strong>Runtime:</strong> ${movie.Runtime}</p>
-            <p><strong>Genre:</strong> ${movie.Genre}</p>
-            <p><strong>Director:</strong> ${movie.Director}</p>
-            <p><strong>Actors:</strong> ${movie.Actors}</p>
-            <p><strong>Plot:</strong> ${movie.Plot}</p>
-            <p><strong>Languages:</strong> ${movie.Language}</p>
-            <h3>Ratings:</h3>
-            ${movie.Ratings.map(rating => `<p>${rating.Source}: ${rating.Value}</p>`).join('')}
-        `;
+        const response = await fetch(url);
+        const data = await response.json();
+        const movieList = document.getElementById('main');
+        movieList.innerHTML = ''; // Clear previous results
+
+        if (data.Response === 'True') {
+            const sortedMovies = data.Search.sort((a, b) => {
+                return parseInt(b.Year) - parseInt(a.Year);
+            });
+            const moviesPerPage = 3; // Number of movies to show per load
+            let currentIndex = 0;
+            const loadMoreButton = document.getElementById('load-more-button');
+
+            const loadMovies = () => {
+                
+
+           // loadMoreButton.style.display = 'none'; // Hide initially
+                const nextMovies = sortedMovies.slice(currentIndex, currentIndex + moviesPerPage);
+                console.log("next movies:",nextMovies);
+                nextMovies.forEach(movie => {
+                    const cardDiv = document.createElement('div');
+                    cardDiv.className = 'card';
+                    cardDiv.style.marginTop='10px';
+                    cardDiv.setAttribute('data-id', movie.imdbID);
+
+                    const description = document.createElement('h1');
+                    description.innerHTML = `${movie.Title} (${movie.Year})`;
+                    description.style.alignContent='center';
+                    cardDiv.appendChild(description);
+
+                    const img = document.createElement('img');
+                    img.src = movie.Poster !== 'N/A' ? movie.Poster : 'path/to/default-image.png';
+                    img.alt = movie.Title;
+                    img.style.width = '100%';
+                    img.style.height= '300px';
+                    cardDiv.appendChild(img);
+
+                    const overlay = document.createElement('div');
+                    overlay.className = 'overlay';
+                    const overlayText = document.createElement('div');
+                    overlayText.className = 'overlay-text';
+                    overlayText.textContent = "Click to see more";
+                    overlay.style.fontStyle="oblique";
+                    overlay.appendChild(overlayText);
+                    cardDiv.appendChild(overlay);
+
+                    movieList.appendChild(cardDiv);
+
+                    cardDiv.addEventListener('click', async function() {
+                        const movieId = this.getAttribute('data-id');
+                        await handleCardClick(movieId);
+                    });
+                });
+
+                currentIndex += moviesPerPage;
+
+                if (currentIndex >= sortedMovies.length) {
+                    loadMoreButton.style.display = 'none'; // Hide button when all movies are loaded
+                } else {
+                    loadMoreButton.style.display = 'block'; // Show button
+                }
+            };
+
+            loadMovies(); // Load initial set of movies
+
+            loadMoreButton.addEventListener('click', loadMovies); // Load more on button click
+
+        } else {
+            movieList.innerHTML = '<h1>No results found</h1>';
+        }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+});
+
+async function handleCardClick(movieId) {
+    const apiKey = '262e0edd'; // Replace with your OMDb API key
+    const url = `http://www.omdbapi.com/?apikey=${apiKey}&i=${encodeURIComponent(movieId)}&plot=full`;
+
+    try {
+        const response = await fetch(url);
+        const movieDetails = await response.json();
+
+        if (movieDetails.Response === 'True') {
+            const { Title: movieTitle, Year: movieYear, Rated: movieRated, Released: movieRelease,
+                    Runtime: movieRunTime, Genre: movieGenre, Director: movieDirector, 
+                    Actors: movieActors, Plot: moviePlot, Poster: moviePoster, Language:movieLanguage, Ratings:movieRatings } = movieDetails;
+                    const ratingsString = movieRatings.map(rating => `${rating.Source}: ${rating.Value}`).join(', ');
+
+            const iframe = document.getElementById('movie-iframe');
+            iframe.src = `details.html?title=${encodeURIComponent(movieTitle)}&year=${encodeURIComponent(movieYear)}&id=${encodeURIComponent(movieId)}
+            &rated=${encodeURIComponent(movieRated)}&release=${encodeURIComponent(movieRelease)}&runtime=${encodeURIComponent(movieRunTime)}
+            &genre=${encodeURIComponent(movieGenre)}&director=${encodeURIComponent(movieDirector)}&actors=${encodeURIComponent(movieActors)}
+            &plot=${encodeURIComponent(moviePlot)}&poster=${encodeURIComponent(moviePoster)}
+            &language=${encodeURIComponent(movieLanguage)}&ratings=${encodeURIComponent(ratingsString)}`;
+        } else {
+            console.error('Error fetching movie details:', movieDetails.Error);
+        }
     } catch (error) {
         console.error('Error fetching movie details:', error);
     }
-};
-
-document.getElementById('sort-year').addEventListener('click', () => {
-    movieData.sort((a, b) => parseInt(b.Year) - parseInt(a.Year));
-    displayMovies(movieData);
-});
-
-document.getElementById('search').addEventListener('input', (event) => {
-    const searchQuery = event.target.value.toLowerCase();
-    const filteredMovies = movieData.filter(movie =>
-        movie.Title.toLowerCase().includes(searchQuery)
-    );
-    displayMovies(filteredMovies);
-});
-
-document.getElementById('load-more').addEventListener('click', () => {
-    currentPage++;
-    fetchMovies(currentPage);
-});
-
-window.onload = () => fetchMovies();
+}
