@@ -231,3 +231,10 @@ input:not(:placeholder-shown) {
   font-family: 'Times New Roman', Times, serif;
   font-style: oblique;
 }
+
+.no-results {
+  color: red;
+  font-size: 24px;
+  text-align: center;
+  margin-top: 20px; /* Optional: Adds some space above the message */
+}

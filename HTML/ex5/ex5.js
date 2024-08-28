@@ -12,8 +12,7 @@ document.addEventListener("DOMContentLoaded", async function () { // to load def
 const sortSelect = document.getElementById('sort');
 sortSelect.addEventListener('change', async () => { //implementing sort by year
     sortOption = sortSelect.value;
-    console.log(sortOption);
-    query = document.getElementById('search-input').value || 'blade';
+    let query = document.getElementById('search-input').value || 'blade';
     const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(query)}`;
     await getMovies(url, sortOption);
 });
@@ -54,20 +53,20 @@ async function handleCardClick(movieId) { // to display i frame contents on card
 async function getMovies(url, sortOption) {
     try {
         const response = await fetch(url);
-        const data = await response.json();
+        const movieData = await response.json();
         const movieList = document.getElementById('main');
         movieList.innerHTML = ''; // Clear previous results
 
-        if (data.Response === 'True') {
+        if (movieData.Response === 'True') {
             currentIndex = 0; // Reset index for a new search
-            sortedMovies = await sortMovie(data, sortOption);
+            sortedMovies = await sortMovie(movieData, sortOption);
 
             loadMovies(); // Load initial set of movies
         } else {
-            movieList.innerHTML = '<h1>No results found</h1>';
+            movieList.innerHTML = '<h1 class="no-results">No results found</h1>';
         }
     } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching movieData:', error);
     }
 }
 
@@ -76,8 +75,6 @@ function loadMovies() { // loads content based on inputs
     const loadMoreButton = document.getElementById('load-more-button');
 
     const nextMovies = sortedMovies.slice(currentIndex, currentIndex + moviesPerPage);
-    console.log("sorted movies", sortedMovies);
-    console.log("next movies:", nextMovies);
     nextMovies.forEach(movie => {
         const cardDiv = document.createElement('div');
         cardDiv.className = 'card';
@@ -124,15 +121,15 @@ function loadMovies() { // loads content based on inputs
 
 document.getElementById('load-more-button').addEventListener('click', loadMovies); //attached outside get movies 
 
-async function sortMovie(data, option) { //sorts movies
+async function sortMovie(movieData, option) { //sorts movies
     let sortedMovies;
 
     if (option === "ascending") {
-        sortedMovies = data.Search.sort((a, b) => {
+        sortedMovies = movieData.Search.sort((a, b) => {
             return parseInt(a.Year) - parseInt(b.Year);
         });
     } else {
-        sortedMovies = data.Search.sort((a, b) => {
+        sortedMovies = movieData.Search.sort((a, b) => {
             return parseInt(b.Year) - parseInt(a.Year);
         });
     }

@@ -31,7 +31,7 @@ body {
     place-items: center;
   } */
 .card::before {
-    content:url(new-usemango-logo.png);
+    content:url(../ex1/assets/new-usemango-logo.png);
     position: absolute;
     top: 50%;
     left: 50%;
