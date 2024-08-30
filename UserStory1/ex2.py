@@ -1,29 +1,30 @@
 arr=['9','5','1','2','3','4','0','-1']
 
-class range_functions:
-    def __init__(self,index1, index2, index3):
-        self.index1=index1
-        self.index2=index2
-        self.index3=index3
+class RangeFunctions:
+    
 
-    def element_at(self,arr):
-        print(arr[self.index1])
-        return arr[self.index1]
+    def element_at(self,arr,index):
+        print(arr[index])
+        return arr[index]
 
-    def inclusive_range(self,arr):
-        print( arr[self.index2:self.index3])
-        return arr[self.index2:self.index3]
+    def inclusive_range(self,arr,start_pos,end_pos):
+        print( arr[start_pos:end_pos+1])
+        return arr[start_pos:end_pos+1]
      
-    def non_inclusive_range(self,arr):
-        print( arr[self.index2:self.index3])
-        return arr[self.index2:self.index3]
+    def non_inclusive_range(self,arr,start_pos,end_pos):
+        print( arr[start_pos:end_pos])
+        return arr[start_pos:end_pos]
 
-    def start_and_length(self,arr):
-        print( arr[self.index2:self.index2+self.index1])
-        return arr[self.index2:self.index2+self.index1]
+    def start_and_length(self,arr,start_pos,len):
+        print( arr[start_pos:start_pos+len])
+        return arr[start_pos:start_pos+len]
 
-obj1=range_functions(3,4,6)
-obj1.element_at(arr)
-obj1.inclusive_range(arr)
-obj1.non_inclusive_range(arr)
-obj1.start_and_length(arr)
+obj1=RangeFunctions(3,4,6)
+index=print("enter index for element at")
+obj1.element_at(arr, index)
+start_pos=print("enter start position :")
+end_pos=print("enter end position :")
+obj1.inclusive_range(arr,start_pos,end_pos)
+obj1.non_inclusive_range(arr,start_pos,end_pos)
+length_of_array=print("enter length of array")
+obj1.start_and_length(arr,start_pos,length_of_array)
