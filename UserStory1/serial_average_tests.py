@@ -51,30 +51,3 @@ class TestSerialAverage(unittest.TestCase):
 if __name__ == '__main__':
     unittest.main()
 
-
-
-
-
-
-
-
-
-
-
-
-
-# class SerialAverageTest(unittest.TestCase):
-    
-#     def test_average(self):
-#         number1=int(input("enter 1st number:"))
-#         number2=int(input("enter 2nd number:"))
-#         self.assertEqual(get_average(number1,number2), '15.00')
-
-#     def test_split_serial(self):
-#         self.assertEqual(split_number(),'888-15.00')
-    
-
-
-
-# if __name__ == "__main__":
-#     unittest.main()

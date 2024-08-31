@@ -1,7 +1,7 @@
-arr=['9','5','1','2','3','4','0','-1']
+
 
 class RangeFunctions:
-    
+    arr=['9','5','1','2','3','4','0','-1']
 
     def element_at(self,arr,index):
         print(arr[index])
@@ -21,10 +21,10 @@ class RangeFunctions:
 
 obj1=RangeFunctions()
 index=int(input("enter index for element at"))
-obj1.element_at(arr, index)
+obj1.element_at(obj1.arr, index)
 start_pos=int(input("enter start position :"))
 end_pos=int(input("enter end position :"))
-obj1.inclusive_range(arr,start_pos,end_pos)
-obj1.non_inclusive_range(arr,start_pos,end_pos)
+obj1.inclusive_range(obj1.arr,start_pos,end_pos)
+obj1.non_inclusive_range(obj1.arr,start_pos,end_pos)
 length_of_array=int(input("enter length of array"))
-obj1.start_and_length(arr,start_pos,length_of_array)
+obj1.start_and_length(obj1.arr,start_pos,length_of_array)
