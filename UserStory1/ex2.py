@@ -19,12 +19,12 @@ class RangeFunctions:
         print( arr[start_pos:start_pos+len])
         return arr[start_pos:start_pos+len]
 
-obj1=RangeFunctions(3,4,6)
-index=print("enter index for element at")
+obj1=RangeFunctions()
+index=int(input("enter index for element at"))
 obj1.element_at(arr, index)
-start_pos=print("enter start position :")
-end_pos=print("enter end position :")
+start_pos=int(input("enter start position :"))
+end_pos=int(input("enter end position :"))
 obj1.inclusive_range(arr,start_pos,end_pos)
 obj1.non_inclusive_range(arr,start_pos,end_pos)
-length_of_array=print("enter length of array")
+length_of_array=int(input("enter length of array"))
 obj1.start_and_length(arr,start_pos,length_of_array)
