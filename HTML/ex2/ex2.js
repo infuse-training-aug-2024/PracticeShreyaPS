@@ -12,14 +12,12 @@ function displayTime() {
 }
 
 
-function toggle()
+function toggle_mode()
 {
     const container = document.getElementById("container");
     container.classList.toggle("dark-container");
-    // Assuming you have a reference to the button element
     const button = document.querySelector('button');
 
-// Toggle the text content based on the current text
 if (button.textContent === 'Change to Light mode') {
   button.textContent = 'Change to Dark mode';
 } else {

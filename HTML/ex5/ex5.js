@@ -11,14 +11,14 @@ document.addEventListener("DOMContentLoaded", async function () { // to load def
 
 const sortSelect = document.getElementById('sort');
 sortSelect.addEventListener('change', async () => { //implementing sort by year
-    sortOption = sortSelect.value;
+    let sortOption = sortSelect.value;
     let query = document.getElementById('search-input').value || 'blade';
     const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(query)}`;
     await getMovies(url, sortOption);
 });
 
 document.getElementById('search-button').addEventListener('click', async function () { //passing query for search input
-    query = document.getElementById('search-input').value;
+    let query = document.getElementById('search-input').value;
     const url = `http://www.omdbapi.com/?apikey=${apiKey}&s=${encodeURIComponent(query)}`;
     await getMovies(url, sortOption);
 });

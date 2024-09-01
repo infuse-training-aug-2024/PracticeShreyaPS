@@ -27,9 +27,7 @@ body {
     height: 100vh;
   }
 
-  /* img{
-    place-items: center;
-  } */
+
 .card::before {
     content:url(../ex1/assets/new-usemango-logo.png);
     position: absolute;
