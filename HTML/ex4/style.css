@@ -193,11 +193,12 @@
   flex-direction: column;
 }
 .test-variables > .bi-plus{
-  float: right; 
+  align-self: flex-end;
   background-color: white;
   color: rgb(1, 149, 194);
   border: 2px solid ;
   border-style:  solid solid none solid;
+  padding-left:  281px;
 }
 .table-header{
   background-color: white;
@@ -220,11 +221,12 @@
   
 }
 .test-parameters > .bi-plus{
-  float: right; 
+  align-self: flex-end;
   background-color: white;
   color: rgb(1, 149, 194);
   border: 2px solid ;
   border-style:  solid solid none solid;
+  padding-left:  281px;
 }
 .test-main > .test-data{
   float: right;
