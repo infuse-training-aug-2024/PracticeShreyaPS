@@ -1,0 +1,233 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  .container {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 20% auto;
+  }
+  
+  aside {
+    border-right: 1px solid rgb(205, 205, 205);
+    margin-left: 15px;
+  }
+  
+  .um-logo {
+    padding: 16px 24px;
+    border-bottom: 1px solid rgb(205, 205, 205);
+    width: 100%;
+  }
+  
+  .um-user{
+    display: flex;
+  }
+
+  .um-user span{
+    display: block;
+    margin-left: 10px;
+  }
+
+  .um-user-name{
+    color: rgb(0, 113, 147);
+  }
+
+  .um-user-email {
+    font-size: x-small;
+  }
+  
+  .um-user img {
+    width: 40px;
+  }
+  
+  .test-designer {
+    width: 100%;
+    height: 375px;
+    background-color: rgb(225, 225, 225);
+  }
+
+  .um-navitems__main li{
+    list-style: none;
+    padding: 15px 15px 15px 0px;
+    color: rgb(0, 113, 147);
+    
+  }
+
+  .um-navitems__main{
+    list-style: none;
+    padding: 0px 
+    
+  }
+  .um-navitems__main li i{
+    padding-right: 10px;
+  }
+  .um-navitems__secondary li{
+    list-style: none;
+    padding: 15px 15px 15px 0px;
+    color: rgb(0, 113, 147);
+    
+  }
+
+  .um-navitems__secondary{
+    list-style: none;
+    padding: 0px 
+    
+  }
+  .um-navitems__secondary li i{
+    padding-right: 10px;
+  }
+  .nav{
+    border-bottom: 1px solid rgb(205, 205, 205);
+  }
+
+  .test-data{
+    border: 2px solid; /* Defines the border width and style */
+    margin: 15px 5px 5px 5px;
+    background: linear-gradient(to bottom, rgb(0,113,147) 20%, white 20%);
+    color: aliceblue;
+    align-items: center; 
+}
+.form-properties > option{
+  color: gray;
+}
+.test-data > span:first-child {
+  background-color: black;
+  color: aliceblue;
+  padding:0 3px 3px 3px;
+  height: 10px;
+}
+.um-test-name  {
+  background-color: rgb(0, 113, 147);
+  color: aliceblue;
+  padding: px;
+  margin:0 4px 0 3px;
+}
+
+.test-data > .bi-x {
+  float: right; /* Pushes the icon to the far right */
+}
+
+.test-properties{
+  background-color:rgb(1, 149, 194) ;
+  margin-top: 5px;
+}
+.test-properties >span{
+  padding-left: 2px;
+}
+.form-properties{
+  background-color: white;
+  color: rgb(0, 113, 147);
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.form-properties label select i{
+  margin-left: 4px;
+}
+.description{
+  display:grid;
+  justify-content: space-between;
+  flex: 0 0 30%
+}
+
+.description>textarea{
+  width: 300px;
+  background-color: rgb(225, 225, 225);
+}
+.details{
+  flex: 1; /* Takes up the remaining space on the left */
+  /* margin-right: 60px */
+}
+
+.details > label, select{
+  margin-right: 10px;
+}
+.details> #tags{
+  margin-top: 10px;
+}
+
+.test-main {
+  display: flex;
+  align-items: flex-start; /* Ensures the vertical starting point is the same */
+  margin-top: 3px;
+  background-color: white;
+  color: black;
+  height: 100%;
+}
+.test-main > .test-data{
+  margin: 5px;
+  flex-grow: 1;
+}
+
+.test-flowchart{
+  background-color:rgb(1, 149, 194) ;
+  color: black;
+  width: 70%;
+  border: 2px solid; /* Defines the border width and style */
+  border-color: rgb(0, 113, 147); 
+  height: 420px;
+}
+
+.test-flowchart > span{
+  background-color:rgb(1, 149, 194) ;
+  color: white;
+  width:100%;
+}
+
+.options{
+  background-color: white;
+  color: grey;
+  padding: 3px;
+}
+.options i{
+  padding: 3px;
+  border:  1px rgb(236, 236, 236);
+  border-style: none solid none none;
+}
+
+.test-variables {
+  background-color: rgb(1, 149, 194);
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+.test-variables > .bi-plus{
+  align-self: flex-end;
+  background-color: white;
+  color: rgb(1, 149, 194);
+  border: 2px solid ;
+  border-style:  solid solid none solid;
+  padding-left:  281px;
+}
+.table-header{
+  background-color: white;
+  color: rgb(6, 103, 133);
+  height: 170px;
+  width: 300px;
+  border: 2px solid ;
+  border-style: none solid solid solid;
+}
+.table-header span{
+  margin-right:  30px;
+  
+}
+
+.test-parameters {
+  background-color: rgb(1, 149, 194);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  
+}
+.test-parameters > .bi-plus{
+  align-self: flex-end;
+  background-color: white;
+  color: rgb(1, 149, 194);
+  border: 2px solid ;
+  border-style:  solid solid none solid;
+  padding-left:  281px;
+}
+.test-main > .test-data{
+  float: right;
+}

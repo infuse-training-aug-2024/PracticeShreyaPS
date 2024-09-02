@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details</title>
+    <link rel="stylesheet" src="ex5.css">
+    <style>
+        .heading{
+            display: flex;
+             justify-content: center;
+             color: aliceblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="heading">
+        <h1> MOVIE INFO</h1>
+    </div>
+    <div id="movie-title" style="color: white; border: 1px solid white;"></div>
+    <script>
+    window.addEventListener('load', () => {
+        const params = new URLSearchParams(window.location.search);
+        const title = params.get('title');
+        const year = params.get('year');
+        const id = params.get('id');
+        const genre = params.get('genre');
+        const rated = params.get('rated');
+        const release = params.get('release');
+        const director = params.get('director');
+        const actors = params.get('actors');
+        const plot = params.get('plot');
+        const runtime = params.get('runtime');
+        const language = params.get('language');
+        const ratings = params.get('ratings');
+        const poster = params.get('poster');
+
+        // Select the main container to append the details
+        const movieInfo = document.getElementById('movie-title');
+        movieInfo.className='side-panel';
+        movieInfo.innerHTML = ''; // Clear previous content
+
+        // Arrow function to create and append a div with label and value
+        const createAndAppendDiv = (label, value) => {
+            const div = document.createElement('div');
+            div.innerHTML = `<strong>${label}:</strong> ${value}`;
+            div.style.marginBottom = '10px';
+            movieInfo.appendChild(div);
+        };
+
+        // Create and append divs for each parameter
+        createAndAppendDiv('Title', title);
+        createAndAppendDiv('Year', year);
+        createAndAppendDiv('Genre', genre);
+        createAndAppendDiv('Rated', rated);
+        createAndAppendDiv('Release Date', release);
+        createAndAppendDiv('Director', director);
+        createAndAppendDiv('Actors', actors);
+        createAndAppendDiv('Plot', plot);
+        createAndAppendDiv('Language', language);
+        createAndAppendDiv('Ratings', ratings);
+        createAndAppendDiv('Runtime', runtime);
+
+        // Create and append an image element for the poster
+        if (poster && poster !== 'N/A') {
+            const posterImg = document.createElement('img');
+            posterImg.src = poster;
+            posterImg.alt = `${title} Poster`;
+            posterImg.style.width = '100%';
+            movieInfo.appendChild(posterImg);
+        }
+    });
+    </script>
+</body>
+</html>

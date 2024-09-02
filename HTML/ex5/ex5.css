@@ -1,0 +1,240 @@
+.search-container{
+  display: flex;
+  margin-top: 10px;
+  background-color: black;
+}
+input, button{
+  height: var(--height);
+  font-family: var(--font-fam);
+  border: 2px solid;
+  color: var(--color-dark);
+  font-size: 1.8rem;
+  margin: 0 auto;
+}
+
+button{
+  background-color: #ae0000;
+  color: #fff;
+  margin: 0 auto;
+  margin-top: 10px;
+  border-radius: 5%;
+}
+input[type="search"]{
+  outline: 0; 
+  width: 100%;
+  background: var(--color-light);
+  padding: 0 1.6rem;
+  border-radius: var(--rad);
+  appearance: none; 
+  transition: all var(--dur) var(--bez);
+  transition-property: width, border-radius;
+  z-index: 1;
+  position: relative;
+  margin-top: 10px;
+  color: antiquewhite;
+}
+
+input:not(:placeholder-shown) {
+  border-radius: var(--rad) 0 0 var(--rad);
+  width: calc(100% - var(--btn-width));
+  + button {
+    display: block;
+  }
+}
+
+.header {
+    overflow: hidden;
+    background-color: #ae0000;
+    padding: 20px 10px;
+    height: 100px;
+     display: flex;
+  }
+  #search-input1{
+    float: left;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 25px;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+ 
+  
+  
+  /* Style the header links */
+  .header a input {
+    float: left;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 25px;
+    border-radius: 4px;
+    margin-top: 10px;
+  }
+  
+  /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
+  .header a.logo {
+    
+    color: #fff;
+    text-decoration: none;
+    font-family: "New Amsterdam", sans-serif;
+  font-weight: 400px;
+  font-style:normal;
+  font-size: 100px;
+  }
+  
+  
+  /* Float the link section to the right */
+  .header-right {
+    margin: 0 auto;
+  }
+  #search-button{
+    margin: 0 auto;
+    display: flex;
+    color: #fff;
+    background-color: #ae0000;
+    margin: 5px auto;
+    justify-content: center;
+    padding: 5px;
+  }
+
+  .header-right > input[type=text]  {
+    padding: 6px;
+    border: none;
+    font-size: 17px;
+    color: antiquewhite;
+  }
+  .header-right #search-button{
+    justify-content: center;
+    margin: 5px auto;
+  }
+  
+  .sort-div{
+    display: flex;
+    color: #fff;
+    background-color: #ae0000;
+    margin: 5px auto;
+    justify-content: center;
+    width: 160px;
+    height: 25px;
+    padding: 5px;
+  }
+
+  .sort-div > label{
+    margin-right: 5px;
+  }
+  /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+  @media screen and (max-width: 500px) {
+    .header a input {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+    .header-right {
+      float: none;
+    }
+  }
+  .content {
+    display: flex;
+    height: 100vh; /* Full viewport height */
+    width: 100%;
+    background-color: black;
+}
+
+/* Main content section */
+.main {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Responsive columns */
+    gap: 10px; /* Space between cards */
+    padding: 10px;
+    overflow: auto;
+    flex: 1 1 70%; /* Flex-grow, flex-shrink, flex-basis */
+}
+
+
+/* Iframe panel */
+#movie-iframe {
+    width: 30%; /* Width of the iframe panel */
+    height: 100%;
+    border: none;
+    flex-shrink: 0; /* Prevent the iframe from shrinking */
+    overflow: hidden;
+}
+
+  .card {
+    /* Add shadows to create the "card" effect */
+    box-shadow:  4px 0px 4px rgba(255, 255, 255, 0.358);
+    transition: 0.3s;
+    margin: 30px;
+    max-width: 300px;
+    background-color: #fff;
+    height: 400px;
+    position: relative;
+  }
+  /* On mouse-over, add a deeper shadow */
+  .card:hover {
+    box-shadow: 0 10px 20px 0 rgba(0,0,0,0.2);
+  }
+  
+  /* Add some padding inside the card container */
+  .container {
+    padding: 2px 16px;
+  }
+
+ /* main {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling when the panel is open */
+
+ */
+
+
+.main, .header{
+    padding: 20px;
+    transition: margin-right 0.3s ease;
+}
+
+.side-panel{
+  color: #fff;
+  border: solid 2px;
+  border-color: #fff;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 300px;
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  color: white; /* Text color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease; /* Smooth transition */
+}
+
+.card:hover .overlay {
+  opacity: 1; /* Show overlay on hover */
+}
+
+.overlay-text {
+  text-align: center;
+  font-size: 18px;
+  padding: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  font-style: oblique;
+}
+
+.no-results {
+  color: red;
+  font-size: 24px;
+  text-align: center;
+  margin-top: 20px; /* Optional: Adds some space above the message */
+}
