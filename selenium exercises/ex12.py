@@ -11,20 +11,35 @@ from selenium.webdriver.chrome.service import Service as chromeService
 
 driver_path = "C:/Users/91989/Downloads/driver/chromedriver.exe"
 url = 'https://www.saucedemo.com/v1/'
-username_input_id='user-name'
-password_input_id='password'
-login_id='login-button'
 
 chrome_service = chromeService(executable_path=driver_path)
 driver=Chrome(service=chrome_service)
 
+username_id='user-name'
+password_id='password'
+login_id='login-button'
+product1_id='//*[@id="inventory_container"]/div/div[1]/div[3]/button'
+product2_id='//*[@id="inventory_container"]/div/div[2]/div[3]/button'
+cart_icon_id='.svg-inline--fa.fa-shopping-cart.fa-w-18.fa-3x'
+checkout_id='.btn_action.checkout_button'
+continue_id='.btn_primary.cart_button'
+error_msg_id='//*[@id="checkout_info_container"]/div/form/h3'
+image_id='inventory_item_img'
+
 try:
-    
-    LoginModule.login(username_input_id,password_input_id,login_id,url)
-    cart_icon_id=".svg-inline--fa.fa-shopping-cart.fa-w-18.fa-3x" 
-    wait = WebDriverWait(driver, 10)
-    cart_icon = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR,cart_icon_id)))
-    cart_icon.click()
+    LoginModule.login(username_id,password_id,login_id,url,driver)
+    LoginModule.scroll_up_down(driver)
+    LoginModule.see_dropdown(driver)
+    LoginModule.add_to_cart(driver,product1_id)
+    LoginModule.add_to_cart(driver,product2_id)
+    LoginModule.go_to_cart(driver,cart_icon_id)
+    LoginModule.checkout(driver,checkout_id)
+    LoginModule.continue_checkout(driver,continue_id)
+    driver.back()
+    driver.back()
+    LoginModule.try_drag_drop(driver,image_id)
+
+
 except TimeoutError as e:
     print(f"timeout error occurred :{e}")
 except WebDriverException as e:
