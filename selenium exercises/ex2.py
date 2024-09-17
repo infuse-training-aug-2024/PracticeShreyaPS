@@ -1,15 +1,20 @@
-from selenium.webdriver import Chrome
+from selenium.webdriver import Edge
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from time import sleep
-from selenium.webdriver.chrome.service import Service as chromeService
+from selenium.webdriver.edge.service import Service as edgeService
 
-driver_path="C:/Users/91989/Downloads/driver/chromedriver.exe"
-chrome_service = chromeService(executable_path=driver_path)
-driver=Chrome(service=chrome_service)
+driver_path="C:/Users/91989/Downloads/driver/msedgedriver.exe"
+url='https://www.quora.com/'
+edge_service = edgeService(executable_path=driver_path)
+driver = Edge(service=edge_service)
+try:
 
-driver.get('https://www.quora.com/')
+    driver.get(url)
+    website_title=driver.title
+    print(website_title)
+except Exception as e:
+    print(f"error occured :{e}")
+finally:
+    driver.quit()
 
-title=driver.title
-
-print(title)

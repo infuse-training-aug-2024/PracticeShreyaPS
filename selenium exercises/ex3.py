@@ -8,14 +8,19 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service as chromeService
 
 driver_path="C:/Users/91989/Downloads/driver/chromedriver.exe"
+url="https://demo.automationtesting.in/Register.html"
 chrome_service = chromeService(executable_path=driver_path)
 driver=Chrome(service=chrome_service)
 
-driver.get('https://www.quora.com/')
+driver.get(url)
 try:
     wait = WebDriverWait(driver, 10)
-    add_question_button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, '.q-click-wrapper.puppeteer_test_add_question_button.byzv0ju.b1rvgfgm.bobc9nh.b1cg7ppz.c1nud10e.qu-active--textDecoration--none.qu-focus--textDecoration--none.qu-borderTopLeftRadius--pill.qu-borderBottomLeftRadius--pill.qu-alignItems--center.qu-justifyContent--center.qu-whiteSpace--nowrap.qu-userSelect--none.qu-display--inline-flex.qu-bg--red.qu-tapHighlight--white.qu-textAlign--center.qu-cursor--pointer.qu-hover--textDecoration--none')))
+    add_question_button = wait.until(EC.element_to_be_clickable((By.ID, 'submitbtn')))
     add_question_button.click()
+
+
+except TimeoutError as e:
+    print(f"timeout error:{e}")
 finally:
     sleep(5)
     driver.quit()
