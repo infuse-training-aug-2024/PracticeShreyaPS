@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "env": {
+                "IMAGE_SIZE": "400x400"
+            },
+            "args": ["10", "input_image.jpg", "output_image.jpg"]
+        }
+    ]
+}
