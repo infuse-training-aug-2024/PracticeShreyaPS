@@ -1,0 +1,5 @@
+commands to run :
+ex1: docker run ex1
+ex2: docker run -it ex2
+ex3: docker run -p 4000:4000 -e PORT=4000 express-server
+ex4: 

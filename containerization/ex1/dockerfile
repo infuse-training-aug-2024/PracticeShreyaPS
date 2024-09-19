@@ -17,4 +17,4 @@ COPY . .
 ENV IMAGE_SIZE=300x300
 
 # Define the command to run your script with default arguments (overwritten at runtime)
-CMD ["python", "script.py"]
+CMD ["python", "script.py","10","./input_image.jpg","./output_image.jpg"]
