@@ -1,0 +1,20 @@
+# Use the official Python base image
+FROM python:3.9-slim
+
+# Set the working directory inside the container
+WORKDIR containerization/ex1
+
+# Copy the requirements file to install dependencies
+COPY requirements.txt ./
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application code to the container
+COPY . .
+
+# Set default environment variable for image size
+ENV IMAGE_SIZE=300x300
+
+# Define the command to run your script with default arguments (overwritten at runtime)
+CMD ["python", "script.py"]

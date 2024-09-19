@@ -1,0 +1,23 @@
+# Use the official Node.js image as the base image
+FROM node:14-alpine
+
+# Set the working directory in the container
+WORKDIR containerization/ex3
+
+# Copy package.json and package-lock.json to the container
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application code to the container
+COPY . .
+
+# Expose the port that the app will run on
+EXPOSE $PORT
+
+# Define the environment variable for the port in Docker (can be overridden at runtime)
+ENV PORT=3000
+
+# Start the server
+CMD [ "npm", "start" ]
