@@ -1,4 +1,4 @@
-version: "3.8"
+# version: "3.8"
 services:
   frontend:
     build: ./frontend
@@ -12,3 +12,4 @@ services:
       - '4000:4000'
     stdin_open: true
     tty: true
+
