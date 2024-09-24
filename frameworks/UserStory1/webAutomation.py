@@ -66,7 +66,7 @@ def test_blank_login(driver):
     assert element is not None, "Error message container is not visible on the page!"
 
     # Optionally, assert the text content of the error message
-    expected_error_text = "Your expected error message"
+    expected_error_text = "Epic sadface: Username is required"
     assert expected_error_text in element.text, f"Expected '{expected_error_text}', but got '{element.text}'"
     pass
 
