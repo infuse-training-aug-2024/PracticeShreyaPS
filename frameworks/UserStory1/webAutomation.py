@@ -10,9 +10,9 @@ from webdriver import WebDriver
 from Framework import Framework
 
 class TestSauceDemo(unittest.TestCase):
-    URL=''
-    USERNAME=''
-    PASSWORD=''
+    URL='https://www.saucedemo.com/'
+    USERNAME='standard_user'
+    PASSWORD='secret_sauce'
     WAIT_TIME=10
 
     @classmethod
@@ -29,7 +29,10 @@ class TestSauceDemo(unittest.TestCase):
     def tearDownClass(cls):
         cls.driver.quit()
         
-    
+    def login(self):
+        self.framework.login(self.USERNAME,(By.ID,'user-name'),self.PASSWORD,(By.ID,'password'),(By.ID,'login-button'))
+        
+        pass
 
 
 if __name__ == "__main__":
