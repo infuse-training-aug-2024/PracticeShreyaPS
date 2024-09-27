@@ -29,11 +29,17 @@ class TestSauceDemo(unittest.TestCase):
     def tearDownClass(cls):
         cls.driver.quit()
         
-    def login(self):
-        self.framework.login(self.USERNAME,(By.ID,'user-name'),self.PASSWORD,(By.ID,'password'),(By.ID,'login-button'))
+    def test_login(self):
+        try:
+            self.framework.navigate_to_page(self.URL)
+            self.framework.get_element((By.ID,'user-name'))
+            self.framework.enter_field((By.ID,'user-name'),self.USERNAME)
+            self.assertEqual(self.framework.get_text((By.ID,'user-name'),self.USERNAME))
+
+        except Exception :
+            print("error occured")
         
-        pass
 
 
 if __name__ == "__main__":
-    unittest.main()
+   unittest.main()
