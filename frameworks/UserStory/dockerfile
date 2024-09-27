@@ -1,34 +1,14 @@
-# Use a slim Python base image
 FROM python:3.9-slim
 
 # Set the working directory
 WORKDIR /app
 
-# Install dependencies for Chrome and ChromeDriver
-RUN apt-get update && \
-    apt-get install -y wget gnupg2 curl ca-certificates unzip \
-                       libnss3 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 \
-                       libxcursor1 libxi6 libxrandr2 libxtst6 libglib2.0-0 \
-                       fonts-liberation libappindicator3-1 libatk-bridge2.0-0 \
-                       libxss1 xdg-utils libasound2 libatk1.0-0 libpangocairo-1.0-0 \
-                       libgtk-3-0 libgbm1 && \
-    wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | tee /etc/apt/trusted.gpg.d/google.asc && \
-    sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list' && \
-    apt-get update && \
-    apt-get install -y google-chrome-stable && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+# Install necessary Python dependencies
+RUN pip install --upgrade pip
+RUN pip install selenium
 
-# Install Python dependencies
-RUN python -m pip install --upgrade pip && \
-    pip install selenium webdriver-manager
+# Copy your test files into the container
+COPY . .
 
-# Copy the application files to the container
-COPY ./app /app
-
-# Set Chrome options to run in headless mode
-ENV CHROME_OPTIONS="--headless --disable-gpu --no-sandbox --disable-dev-shm-usage"
-
-# Command to run your tests
-CMD ["python", "test_frameworks.py"]
-
+# Run the test framework
+CMD ["python", "test_framework.py"]

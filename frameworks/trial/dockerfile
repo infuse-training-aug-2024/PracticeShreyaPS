@@ -1,0 +1,31 @@
+FROM python:3.9-slim
+ 
+WORKDIR /app
+ 
+COPY requirements.txt /app
+ 
+COPY . /app
+ 
+RUN pip install --upgrade pip \
+    && pip install selenium testresources
+ 
+ENV CHROMEDRIVER_VERSION=129.0.6668.70
+ENV CHROMEDRIVER_DIR=/app/chromedriver
+ 
+RUN mkdir -p /app/driver
+ 
+RUN apt-get update && apt-get install -y unzip curl gnupg && rm -rf /var/lib/apt/lists/*
+RUN curl -sS -o /app/driver/chromedriver_linux64.zip https://storage.googleapis.com/chrome-for-testing-public/${CHROMEDRIVER_VERSION}/linux64/chromedriver-linux64.zip
+RUN unzip /app/driver/chromedriver_linux64.zip -d /app/driver
+RUN rm /app/driver/chromedriver_linux64.zip
+RUN pip install --no-cache-dir -r requirements.txt
+ 
+RUN chmod +x /app/driver/chromedriver-linux64/chromedriver
+ 
+# Install Google Chrome stable version
+RUN curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
+    && apt-get update && apt-get install -y google-chrome-stable \
+    && rm -rf /var/lib/apt/lists/*
+ 
+CMD ["python", "test_frameworks.py"]
