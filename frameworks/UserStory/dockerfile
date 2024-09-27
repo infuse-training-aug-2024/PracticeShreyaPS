@@ -1,0 +1,25 @@
+# Use a slim Python base image
+FROM python:3.9-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Install necessary dependencies for Chrome and ChromeDriver
+RUN apt-get update && \
+    apt-get install -y wget gnupg2 curl ca-certificates unzip && \
+    wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | tee /usr/share/keyrings/google-archive-keyring.gpg && \
+    echo "deb [signed-by=/usr/share/keyrings/google-archive-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | tee /etc/apt/sources.list.d/google-chrome.list && \
+    apt-get update && \
+    apt-get install -y google-chrome-stable && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install ChromeDriver using webdriver-manager
+RUN python -m pip install --upgrade pip; \
+    pip install selenium webdriver-manager testresources
+
+# Copy the application files
+COPY ./app /app
+
+# Command to run your application (update according to your app)
+CMD ["python", "test_frameworks.py"]
