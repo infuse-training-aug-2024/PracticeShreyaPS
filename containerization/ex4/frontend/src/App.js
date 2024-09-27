@@ -3,10 +3,20 @@ import "./App.css";
 import React, { useEffect } from "react";
 
 function App() {
+ 
   const fetchData = async () => {
-    const res = await fetch("http://localhost:4000/");
-    console.log(res);
-  };
+    try {
+        const res = await fetch("http://localhost:4000/");
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        const data = await res.json();
+        console.log('API response:', data);
+         }
+     catch (error) {
+        console.error('Error fetching data:', error);
+    }
+};
 
   useEffect(() => {
     fetchData();

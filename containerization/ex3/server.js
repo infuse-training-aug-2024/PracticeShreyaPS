@@ -5,7 +5,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
-    res.send(`Server is running on port ${PORT}`);
+    res.json({ message: `Server is running on port ${PORT}` }); // Sending JSON response
 });
 
 // Start the server
