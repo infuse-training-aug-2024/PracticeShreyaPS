@@ -29,6 +29,7 @@ class Framework:
 
     def click_element(self, locator):
         try:
+            element = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator))
             element = self.driver.find_element(*locator)
             element.click()
             return True  
@@ -75,7 +76,7 @@ class Framework:
         
     def get_elements(self, locator):
             try:
-                self.wait.until(EC.presence_of_element_located(locator))
+                self.wait.until(EC.visibility_of_all_elements_located(locator))
                 elements = self.driver.find_elements(*locator)
                 return elements
             except TimeoutException:

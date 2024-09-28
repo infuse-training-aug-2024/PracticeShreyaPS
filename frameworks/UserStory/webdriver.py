@@ -14,20 +14,21 @@
 #         self.driver =webdriver.Chrome(service=service,options=option)
 
 
-# from selenium import webdriver
-# from selenium.webdriver.chrome.service import Service
-# from selenium.webdriver.chrome.options import Options
-# from webdriver_manager.chrome import ChromeDriverManager
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
 
-# class WebDriver:
-#     def __init__(self):
-#         # Automatically download and use the correct version of chromedriver
-#         service = Service(ChromeDriverManager().install())
-#         options = Options()
-#         options.add_argument("--headless")
-#         options.add_argument('--no-sandbox')
-#         options.add_argument('--disable-dev-shm-usage')
-#         self.driver = webdriver.Chrome(service=service, options=options)
+class WebDriver:
+    def __init__(self):
+        # Automatically download and use the correct version of chromedriver
+        service = Service(ChromeDriverManager().install())
+        options = Options()
+        #options.add_argument("--headless")
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
+        #options.add_argument('--disable-gpu')
+        self.driver = webdriver.Chrome(service=service, options=options)
 
 
 # from selenium import webdriver
@@ -58,19 +59,19 @@
 #         self.driver = webdriver.Chrome(service=service, options=chrome_options)
 
 
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+# from selenium import webdriver
+# from selenium.webdriver.chrome.options import Options
 
-class WebDriver:
-    def __init__(self):
-        options = Options()
-        options.add_argument("--headless")
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-dev-shm-usage")
-        options.add_argument("--disable-gpu")
+# class WebDriver:
+#     def __init__(self):
+#         options = Options()
+#         options.add_argument("--headless")
+#         options.add_argument("--no-sandbox")
+#         options.add_argument("--disable-dev-shm-usage")
+#         options.add_argument("--disable-gpu")
         
-        # Use Remote WebDriver to connect to the Selenium Grid
-        self.driver = webdriver.Remote(
-            command_executor='http://selenium-chrome:4444/wd/hub',  # Point to the Chrome service
-            options=options
-        )
+#         # Use Remote WebDriver to connect to the Selenium Grid
+#         self.driver = webdriver.Remote(
+#             command_executor='http://selenium-chrome:4444/wd/hub',  # Point to the Chrome service
+#             options=options
+#         )

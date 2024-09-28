@@ -7,8 +7,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import unittest
 from webdriver import WebDriver
-from frameworks.UserStory.app.Framework import Framework
-from frameworks.UserStory.app.Helper_Modules import HelperModules  # Import the helper class
+from Framework import Framework
+from Helper_Modules import HelperModules  # Import the helper class
 
 class TestSauceDemo(unittest.TestCase):
     URL = 'https://www.saucedemo.com/'
