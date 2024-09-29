@@ -43,12 +43,12 @@ class SidebarTests(unittest.TestCase):
         except Exception as e:
             print(f"Error occurred: {e}")
 
-
     def test_nav_to_about(self):
         """Test sidebar navigation to about page."""
         try:
             self.helper.login(self.URL, self.USERNAME, self.PASSWORD)
-            self.helper.navigate_and_verify((By.ID, 'about_sidebar_link'), "https://saucelabs.com/")
+            actual_url=self.helper.navigate_and_verify((By.ID, 'about_sidebar_link'), "https://saucelabs.com/")
+            self.assertEqual(actual_url,'https://saucelabs.com/')
         except AssertionError:
             print("Page did not redirect to about.")
         except Exception as e:
@@ -67,7 +67,6 @@ class SidebarTests(unittest.TestCase):
             print(f"Error occurred: {e}")
 
     def test_reset(self):
-        """Test sidebar reset functionality."""
         try:
             self.helper.login(self.URL, self.USERNAME, self.PASSWORD)
             self.helper.add_item_to_cart('add-to-cart-sauce-labs-backpack')

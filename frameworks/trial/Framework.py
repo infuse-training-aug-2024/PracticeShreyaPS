@@ -2,7 +2,6 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 
@@ -21,10 +20,7 @@ class Framework:
             print(f"Error navigating to page: {e}")
             return None  
 
-
-#interaction functions----------------------------------------------
-
-
+    #interaction functions----------------------------------------------
     def click_element(self, locator):
         try:
             element = self.driver.find_element(*locator)
@@ -45,8 +41,6 @@ class Framework:
             print(f"Element with locator {locator} not found in time.")
             return False
         
-
-
     def select_option_by_value(self, locator, value):
             try:
                 self.wait.until(EC.presence_of_element_located(locator))
@@ -60,7 +54,6 @@ class Framework:
             except NoSuchElementException as e:
                 print(f"Error selecting option by value: {e}")
                 return None
-
 
     def get_element(self, locator):
         try:
@@ -80,7 +73,6 @@ class Framework:
                 print(f"Error getting the elements: ")
                 return []
 
-
     def is_element_visible(self, locator):
         try:
             element = self.driver.find_element(*locator)
@@ -88,7 +80,6 @@ class Framework:
         except NoSuchElementException:
             print(f"Element with locator {locator} not found on the page.")
             return False
-
 
     def get_text(self, locator):
         try:
@@ -99,8 +90,6 @@ class Framework:
             print(f"Error getting text of the element in time: ")
             return None
 
-        
-
     def get_attribute(self, locator, attribute_name):
         try:
             element = self.driver.find_element(*locator)
@@ -109,7 +98,6 @@ class Framework:
             print(f"Error getting attribute '{attribute_name}' from element: {e}")
             return None
 
-    
     # Form handling ---------------------------------------------------
     def submit_form(self, locator):
         try:
@@ -147,7 +135,6 @@ class Framework:
             print(f"Error getting page title: {e}")
             return None
 
-
     def handle_alert(self):
         try:
             alert = self.driver.switch_to.alert
@@ -175,11 +162,7 @@ class Framework:
             print(f"Error logging out: {e}")
             return False
 
-
-
     # Alerts ----------------------------------------------------------
-
-
     def get_alert_text(self):
         try:
             alert = self.driver.switch_to.alert
@@ -189,8 +172,6 @@ class Framework:
             return None
 
     # Window management -----------------------------------------------
-
-
     def maximize_window(self):
         try:
             self.driver.maximize_window()

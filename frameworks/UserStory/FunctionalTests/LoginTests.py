@@ -10,7 +10,7 @@ from webdriver import WebDriver
 from Framework import Framework
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import StaleElementReferenceException
-
+from Helper_Modules import HelperModules
 
 class LoginTests(unittest.TestCase):
     URL='https://www.saucedemo.com/'
@@ -24,6 +24,7 @@ class LoginTests(unittest.TestCase):
             cls.webdriver =WebDriver()
             cls.driver= cls.webdriver.driver
             cls.framework= Framework(cls.driver)
+            cls.helper=HelperModules(cls.framework)
         except Exception as e:
             print(f"error in setup;{e}")
             cls.driver.quit()
@@ -46,7 +47,6 @@ class LoginTests(unittest.TestCase):
         except Exception as e:
             print(f"fill form error occured:{e}")
 
-
     def test_invalid_login(self):
         try:
             self.framework.navigate_to_page(self.URL)
@@ -62,7 +62,7 @@ class LoginTests(unittest.TestCase):
     def test_navigate_to_invalid_login(self):
         try:
             self.test_login()
-            self.logout()
+            self.helper.logout()
             self.driver.back()
             self.assertEqual(self.framework.get_current_url(),self.URL)
         except AssertionError as ae:

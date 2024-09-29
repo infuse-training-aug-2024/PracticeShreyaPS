@@ -8,12 +8,9 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 class TestFramework(unittest.TestCase):
-    demo_url='https://www.phptravels.net/'
     URL='https://www.saucedemo.com/'
-    URL_for_inventory='https://www.saucedemo.com/inventory.html'
-    url2='https://cosmocode.io/automation-practice-webtable/'
-    url3='https://testpages.herokuapp.com/styled/basic-html-form-test.html'
-
+    URL2='https://cosmocode.io/automation-practice-webtable/'
+    URL3='https://testpages.herokuapp.com/styled/basic-html-form-test.html'
 
     @classmethod
     def setUpClass(cls):
@@ -39,8 +36,6 @@ class TestFramework(unittest.TestCase):
         print(f"url:{current_url}")
         self.assertIsNotNone(page_title)
 
-
-
     def test_click_element(self):
         self.framework.navigate_to_page(self.URL)
         locator = (By.ID, "user-name")
@@ -54,14 +49,10 @@ class TestFramework(unittest.TestCase):
         self.assertTrue(input)
 
     def test_enter_invalid_field(self):
-        self.framework.navigate_to_page(self.URL)  # Navigate to the intended URL
-        locator = (By.ID, "invalid")  # Locator for an invalid field
-        input_result = self.framework.enter_field(locator, "standard_user")  # Attempt to enter text
-
-        # Assert that the input result is False since the locator is invalid
+        self.framework.navigate_to_page(self.URL)  
+        locator = (By.ID, "invalid")  
+        input_result = self.framework.enter_field(locator, "standard_user")  
         self.assertFalse(input_result, "Expected entering text into an invalid field to return False.")
-
-
 
     def test_get_text(self):
         self.driver.get(self.URL)
@@ -100,20 +91,12 @@ class TestFramework(unittest.TestCase):
         self.assertIsNone(element)
 
     def test_get_elements(self):
-        self.driver.get(self.url2) 
+        self.driver.get(self.URL2) 
         WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, "countries")))  
         locator = (By.TAG_NAME, "tr")  
         elements = self.framework.get_elements(locator) 
         self.assertIsNotNone(elements)
         self.assertGreater(len(elements), 0, "No elements found")
-
-                    # def test_get_elements_invalid_case(self):
-                    #     self.driver.get(self.url2) 
-                    #     WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, "countries")))  
-                    #     locator = (By.TAG_NAME, "invalid")  
-                    #     elements = self.framework.get_elements(locator) 
-                    #     self.assertIsNone(elements)
-                    #     self.assertEqual(len(elements), 0, "No elements found")
 
     def test_submit_form(self):
         self.driver.get(self.URL)
@@ -139,26 +122,21 @@ class TestFramework(unittest.TestCase):
     def test_fill_form_invalid_locator(self):
         self.driver.get(self.URL)
         invalid_form_data = {
-            "invalid-user-name": "invalid_user",  # Invalid ID for user-name
-            "invalid-password": "invalid_password"  # Invalid ID for password
+            "invalid-user-name": "invalid_user", 
+            "invalid-password": "invalid_password"
         }
         result = self.framework.fill_form(invalid_form_data)
         self.assertFalse(result, "Expected fill_form to return False for invalid locators.")
 
-
     def test_select_option_by_value(self):
-            self.driver.get(self.url3)  # Navigate to the page with the dropdown
-            locator = (By.NAME, 'dropdown')  # Use the correct locator
-            result = self.framework.select_option_by_value(locator, 'dd4')  # Attempt to select 'economy'
-            
-            # Check if the selection was successful
+            self.driver.get(self.URL3)  
+            locator = (By.NAME, 'dropdown')  
+            result = self.framework.select_option_by_value(locator, 'dd4')  
             self.assertEqual(result, "Drop Down Item 4") 
     def test_select_option_by_value_invalid(self):
-            self.driver.get(self.url3)  # Navigate to the page with the dropdown
-            locator = (By.NAME, 'dropdown')  # Use the correct locator
-            result = self.framework.select_option_by_value(locator, 'invalid')  # Attempt to select 'economy'
-            
-            # Check if the selection was successful
+            self.driver.get(self.URL3) 
+            locator = (By.NAME, 'dropdown') 
+            result = self.framework.select_option_by_value(locator, 'invalid')  
             self.assertIsNone(result) 
 
     def test_handle_alert(self):
@@ -181,12 +159,8 @@ class TestFramework(unittest.TestCase):
             self.driver.switch_to.alert.accept()
 
     def test_get_alert_text_no_alert(self):
-        self.driver.get("about:blank")  # Load a blank page where no alert is present
-        
-        # Attempt to get alert text when no alert is present
+        self.driver.get("about:blank")
         alert_text = self.framework.get_alert_text()
-
-        # Check that the method returns None when no alert is present
         self.assertIsNone(alert_text, "Expected None when no alert is present")
 
     def test_login_valid_credentials(self):
@@ -218,8 +192,6 @@ class TestFramework(unittest.TestCase):
         self.assertTrue(logout_result)
         self.assertEqual(self.URL, self.driver.current_url)
 
-
-
     def test_maximize_window(self):
         self.framework.navigate_to_page(self.URL)
         result = self.framework.maximize_window()
@@ -232,14 +204,10 @@ class TestFramework(unittest.TestCase):
         if (lambda d: d.get_window_position()['y'] > 0):
             self.assertTrue(result)
 
-
-
     def test_get_page_title(self):
         page_title=self.framework.get_page_title()
         self.assertEqual(page_title,self.driver.title)
-
-
-         
+     
     def test_get_current_url(self):
          self.driver.get(self.URL)
          current_url=self.framework.get_current_url()
@@ -254,12 +222,6 @@ class TestFramework(unittest.TestCase):
         actual_value = self.framework.get_attribute(locator, attribute_name)
         self.assertEqual(actual_value, expected_value)
 
-
-
-
-
-
-
     def test_click_invalid_element(self):
         self.framework.navigate_to_page(self.URL)
         invalid_locator = (By.ID, "invalid-element")
@@ -269,10 +231,8 @@ class TestFramework(unittest.TestCase):
     def test_enter_invalid_input(self):
         self.framework.navigate_to_page(self.URL)
         locator = (By.ID, "user-name")
-        input_result = self.framework.enter_field(locator, "")  # Trying to enter an empty string
+        input_result = self.framework.enter_field(locator, "")  
         self.assertTrue(input_result)
-
-
 
     def test_element_not_visible(self):
         self.framework.navigate_to_page(self.URL)
