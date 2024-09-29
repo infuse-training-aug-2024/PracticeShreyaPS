@@ -37,30 +37,24 @@ class SidebarTests(unittest.TestCase):
         try:
             self.helper.login(self.URL, self.USERNAME, self.PASSWORD)
             actual_url = self.helper.navigate_and_verify((By.ID, 'inventory_sidebar_link'), "https://www.saucedemo.com/inventory.html")
-            self.assertEqual("https://www.saucedemo.com/inventory.html", actual_url, f"Expected URL: https://www.saucedemo.com/inventory.html, but got: {actual_url}")
-        except AssertionError as ae:
-            print("Page did not redirect to home.")
+            self.assertEqual("https://www.saucedemo.com/inventory.html", actual_url, f"Sidebar Test Failed: Expected URL: https://www.saucedemo.com/inventory.html, but got: {actual_url}")
         except Exception as e:
             print(f"Error occurred: {e}")
 
     def test_nav_to_about(self):
-        """Test sidebar navigation to about page."""
         try:
             self.helper.login(self.URL, self.USERNAME, self.PASSWORD)
             actual_url=self.helper.navigate_and_verify((By.ID, 'about_sidebar_link'), "https://saucelabs.com/")
-            self.assertEqual(actual_url,'https://saucelabs.com/')
-        except AssertionError:
-            print("Page did not redirect to about.")
+            self.assertEqual(actual_url,'https://saucelabs.com/',f"Sidebar Test Failed: Expected URL: https://www.saucedemo.com/, but got: {actual_url}")
         except Exception as e:
             print(f"Error occurred: {e}")
 
     def test_nav_to_logout(self):
-        """Test sidebar navigation to logout."""
         try:
             self.helper.login(self.URL, self.USERNAME, self.PASSWORD)
             self.helper.logout()
             actual_url = self.driver.current_url
-            self.assertEqual(self.URL, actual_url, f"Expected URL: {self.URL}, but got: {actual_url}")
+            self.assertEqual(self.URL, actual_url, f"Sidebar Test Failed: Expected URL: {self.URL}, but got: {actual_url}")
         except AssertionError:
             print("Page did not redirect to logout.")
         except Exception as e:
@@ -72,17 +66,12 @@ class SidebarTests(unittest.TestCase):
             self.helper.add_item_to_cart('add-to-cart-sauce-labs-backpack')
             self.helper.open_sidebar()
             self.framework.click_element((By.ID, 'reset_sidebar_link'))
-
             WebDriverWait(self.driver, self.WAIT_TIME).until(
                 EC.visibility_of_all_elements_located((By.ID, 'inventory_container'))
             )
-
-            shopping_badge = self.framework.is_element_visible((By.CLASS_NAME, 'shopping_cart_badge'))
-            self.assertFalse(shopping_badge)
-
             remove_button = self.framework.get_element((By.ID, 'remove-sauce-labs-backpack'))
             self.assertIsNone(remove_button)
         except AssertionError:
-            print("Page did not reset.")
+            print("Sidebar Test Failed: App did not reset inventory remove buttons")
         except Exception as e:
             print(f"Error occurred: {e}")

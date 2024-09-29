@@ -47,6 +47,6 @@ class CheckoutTests(unittest.TestCase):
             self.assertEqual(final_amount, 43.18)
             sleep(5)
         except AssertionError as ae:
-            print(f"Total was incorrect: {ae}")
+            print(f"Billing test failed:Total was incorrect: {ae}")
         except Exception as e:
             print(e)

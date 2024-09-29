@@ -2,7 +2,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import StaleElementReferenceException
 
+from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
 class HelperModules:
     WAIT_TIME = 10 
 
@@ -87,12 +89,39 @@ class HelperModules:
             print(f"cart icon did not update:{ae}")
 
     def add_item_to_cart(self, item_id):
-        try:
-            self.framework.click_element((By.ID, item_id))
-            WebDriverWait(self.framework.driver, self.WAIT_TIME).until(
-                EC.visibility_of_element_located((By.CLASS_NAME, 'shopping_cart_badge'))
+        retries = 3 
+        for attempt in range(retries):
+            try:
+                WebDriverWait(self.framework.driver, self.WAIT_TIME).until(
+                    EC.element_to_be_clickable((By.ID, item_id))
+                )
+                element = self.framework.get_element((By.ID, item_id))
+                element.click()
+                WebDriverWait(self.framework.driver, self.WAIT_TIME).until(
+                    EC.visibility_of_element_located((By.CLASS_NAME, 'shopping_cart_badge'))
+                )
+                return True 
+            except StaleElementReferenceException:
+                print(f"StaleElementReferenceException: Attempt {attempt + 1} of {retries}")
+                if attempt < retries - 1:
+                    continue  
+            except TimeoutException:
+                print(f"TimeoutException: Element with ID {item_id} was not clickable in {self.WAIT_TIME} seconds.")
+                return False
+            except Exception as e:
+                print(f"Error adding item to cart: {e}")
+                return False
+        
+        return False  
+
+
+    def remove_item_from_cart(self, item_id):
+            self.framework.click_element((By.CLASS_NAME, 'shopping_cart_link'))
+            WebDriverWait(self.framework.driver, self.framework.WAIT_TIME).until(
+                EC.visibility_of_element_located((By.CLASS_NAME, 'cart_item'))
             )
-            return True
-        except Exception as e:
-            print(f"Error adding item to cart: {e}")
-            return False
+            try:
+                remove_button = self.framework.get_element(By.ID, item_id)
+                remove_button.click()
+            except Exception as e:
+                print(f"Error removing item with ID {item_id}: {e}")

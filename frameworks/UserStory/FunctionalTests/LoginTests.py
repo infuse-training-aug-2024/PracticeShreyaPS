@@ -43,9 +43,9 @@ class LoginTests(unittest.TestCase):
             self.assertEqual(self.framework.get_current_url(),self.driver.current_url)
             sleep(5)
         except AssertionError as ae:
-            print(f"error in navigating:{ae}")
+            print(f"error in navigating to inventory page:{ae}")
         except Exception as e:
-            print(f"fill form error occured:{e}")
+            print(f"Login test failed")
 
     def test_invalid_login(self):
         try:
@@ -57,7 +57,7 @@ class LoginTests(unittest.TestCase):
             error_msg=self.framework.is_element_visible((By.CLASS_NAME,'error-message-container'))
             self.assertTrue(error_msg)
         except AssertionError as ae:
-            print(f"error msg did not load")
+            print(f"Login test failed:error msg did not load")
 
     def test_navigate_to_invalid_login(self):
         try:
@@ -66,4 +66,4 @@ class LoginTests(unittest.TestCase):
             self.driver.back()
             self.assertEqual(self.framework.get_current_url(),self.URL)
         except AssertionError as ae:
-            print(f"invalid navigation to login allowed")
+            print(f"Login test failed:invalid navigation to login allowed")

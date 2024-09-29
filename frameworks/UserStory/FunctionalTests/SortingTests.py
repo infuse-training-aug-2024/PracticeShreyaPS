@@ -35,66 +35,49 @@ class SortingTests(unittest.TestCase):
     def tearDownClass(cls):
         cls.driver.quit()
 
-
     def test_sort_a_to_z(self):
-        """Test sorting items from A to Z."""
         try:
             self.helper.login(self.URL,self.USERNAME,self.PASSWORD)
             self.helper.sort_items('az')
             inventory_items = self.helper.get_inventory_items()
             sorted_inventory_items = sorted(inventory_items)
-
-            self.assertEqual(inventory_items, sorted_inventory_items, "The items are not sorted in ascending order.")
-            print("The items are correctly sorted in ascending order.")
-        
+            self.assertEqual(inventory_items, sorted_inventory_items, "SortTest Failed:The items are not sorted in ascending order.")
         except AssertionError as ae:
             print(f"Test failed: {ae}")
         except Exception as e:
             print(f"An error occurred: {e}")
 
     def test_sort_z_to_a(self):
-        """Test sorting items from Z to A."""
         try:
             self.helper.login(self.URL,self.USERNAME,self.PASSWORD)
             self.helper.sort_items('za')
             inventory_items = self.helper.get_inventory_items()
             sorted_inventory_items_desc = sorted(inventory_items, reverse=True)
-
-            self.assertEqual(inventory_items, sorted_inventory_items_desc, "The items are not sorted in descending order.")
-            print("The items are correctly sorted in descending order (Z to A).")
-
+            self.assertEqual(inventory_items, sorted_inventory_items_desc, "SortTest Failed:The items are not sorted in descending order.")
         except AssertionError as ae:
             print(f"Test failed: {ae}")
         except Exception as e:
             print(f"An error occurred: {e}")
 
     def test_sort_low_to_high(self):
-        """Test sorting items from low price to high price."""
         try:
             self.helper.login(self.URL,self.USERNAME,self.PASSWORD)
             self.helper.sort_items('lohi')
             price_list = self.helper.get_inventory_prices()
             sorted_low_to_high_prices = sorted(price_list)
-
-            self.assertEqual(price_list, sorted_low_to_high_prices, "The items are not sorted.")
-            print("The items are correctly sorted from low to high.")
-        
+            self.assertEqual(price_list, sorted_low_to_high_prices, "SortTest Failed:The items are not sorted low to high by price")
         except AssertionError as ae:
             print(f"Test failed: {ae}")
         except Exception as e:
             print(f"An error occurred: {e}")
 
     def test_sort_high_to_low(self):
-        """Test sorting items from high price to low price."""
         try:
             self.helper.login(self.URL,self.USERNAME,self.PASSWORD)
             self.helper.sort_items('hilo')
             price_list = self.helper.get_inventory_prices()
             sorted_high_to_low_prices = sorted(price_list, reverse=True)
-
-            self.assertEqual(price_list, sorted_high_to_low_prices, "The items are not sorted.")
-            print("The items are correctly sorted from high to low.")
-
+            self.assertEqual(price_list, sorted_high_to_low_prices, "SortTest Failed:The items are not sorted high to low by price")
         except AssertionError as ae:
             print(f"Test failed: {ae}")
         except Exception as e:
