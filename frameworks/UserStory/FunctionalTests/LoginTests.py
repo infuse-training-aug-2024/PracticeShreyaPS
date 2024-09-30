@@ -17,6 +17,7 @@ class LoginTests(unittest.TestCase):
     USERNAME='standard_user'
     PASSWORD='secret_sauce'
     WAIT_TIME=10
+    success_flag=0
 
     @classmethod
     def setUpClass(cls):
@@ -31,6 +32,8 @@ class LoginTests(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
+        if(cls.success_flag==0):
+            print("Login Tests passed successfully")
         cls.driver.quit()
         
     def test_login(self):
@@ -41,6 +44,7 @@ class LoginTests(unittest.TestCase):
             self.framework.submit_form((By.TAG_NAME,'form'))
             WebDriverWait(self.driver,self.WAIT_TIME).until(EC.visibility_of_all_elements_located((By.ID,'inventory_container')))
             self.assertEqual(self.framework.get_current_url(),self.driver.current_url)
+            self.success_flag+=1
             sleep(5)
         except AssertionError as ae:
             print(f"error in navigating to inventory page:{ae}")

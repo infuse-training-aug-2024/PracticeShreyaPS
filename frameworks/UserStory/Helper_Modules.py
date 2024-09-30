@@ -114,7 +114,6 @@ class HelperModules:
         
         return False  
 
-
     def remove_item_from_cart(self, item_id):
             self.framework.click_element((By.CLASS_NAME, 'shopping_cart_link'))
             WebDriverWait(self.framework.driver, self.framework.WAIT_TIME).until(

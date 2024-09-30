@@ -17,6 +17,7 @@ class CheckoutTests(unittest.TestCase):
     USERNAME='standard_user'
     PASSWORD='secret_sauce'
     WAIT_TIME=10
+    success_flag=0
 
     @classmethod
     def setUpClass(cls):
@@ -31,6 +32,8 @@ class CheckoutTests(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
+        if(cls.success_flag==0):
+            print("Checkout Tests passed successfully")
         cls.driver.quit()
         
     def test_billing(self):
@@ -45,6 +48,7 @@ class CheckoutTests(unittest.TestCase):
             self.framework.click_element((By.ID, 'continue'))
             final_amount = self.helper.calculate_total()
             self.assertEqual(final_amount, 43.18)
+            self.success_flag+=1
             sleep(5)
         except AssertionError as ae:
             print(f"Billing test failed:Total was incorrect: {ae}")

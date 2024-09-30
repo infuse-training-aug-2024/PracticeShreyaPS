@@ -16,6 +16,7 @@ class ShoppingCartTests(unittest.TestCase):
     USERNAME = 'standard_user'
     PASSWORD = 'secret_sauce'
     WAIT_TIME = 10
+    success_flag=0
 
     @classmethod
     def setUpClass(cls):
@@ -30,6 +31,8 @@ class ShoppingCartTests(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
+        if(cls.success_flag==0):
+            print("Shopping cart Tests passed successfully")
         if cls.driver:
             cls.driver.quit()
 
@@ -61,6 +64,7 @@ class ShoppingCartTests(unittest.TestCase):
                               f"Shopping cart Test Failed: {item_added_from_inventory} not found in cart")
             self.helper.remove_from_cart('remove-sauce-labs-bike-light')
             self.helper.remove_from_cart('remove-sauce-labs-backpack')
+            self.success_flag+=1
         except AssertionError as ae:
             print(f"Assertion error: {ae}")
         except Exception as e:
@@ -78,6 +82,7 @@ class ShoppingCartTests(unittest.TestCase):
             self.assertEqual(int(cart_item_count_before_logout), int(cart_item_count_after_login))
             self.helper.remove_from_cart('remove-sauce-labs-bike-light')
             self.helper.remove_from_cart('remove-sauce-labs-backpack')
+            self.success_flag+=1
 
         except AssertionError as ae:
             print(f"Shopping cart Test Failed: cart icon history didn't persist: {ae}")
@@ -96,6 +101,7 @@ class ShoppingCartTests(unittest.TestCase):
             self.assertNotIn('Sauce Labs Backpack', items_in_cart,
                              "Shopping cart Test Failed: Sauce Labs Backpack was found in the cart but should have been removed.")
             self.helper.remove_from_cart('remove-sauce-labs-bike-light')
+            self.success_flag+=1
 
         except AssertionError as ae:
             print(f"Shopping cart Test Failed: {ae}")

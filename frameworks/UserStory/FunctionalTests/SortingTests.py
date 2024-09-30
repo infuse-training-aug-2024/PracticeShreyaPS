@@ -18,6 +18,7 @@ class SortingTests(unittest.TestCase):
     USERNAME='standard_user'
     PASSWORD='secret_sauce'
     WAIT_TIME=10
+    success_flag=0
 
     @classmethod
     def setUpClass(cls):
@@ -33,6 +34,8 @@ class SortingTests(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
+        if(cls.success_flag==0):
+            print("Sorting Tests passed successfully")
         cls.driver.quit()
 
     def test_sort_a_to_z(self):
@@ -42,8 +45,9 @@ class SortingTests(unittest.TestCase):
             inventory_items = self.helper.get_inventory_items()
             sorted_inventory_items = sorted(inventory_items)
             self.assertEqual(inventory_items, sorted_inventory_items, "SortTest Failed:The items are not sorted in ascending order.")
-        except AssertionError as ae:
-            print(f"Test failed: {ae}")
+            self.success_flag+=1
+        # except AssertionError as ae:
+        #     print(f"Test failed: {ae}")
         except Exception as e:
             print(f"An error occurred: {e}")
 
@@ -54,6 +58,7 @@ class SortingTests(unittest.TestCase):
             inventory_items = self.helper.get_inventory_items()
             sorted_inventory_items_desc = sorted(inventory_items, reverse=True)
             self.assertEqual(inventory_items, sorted_inventory_items_desc, "SortTest Failed:The items are not sorted in descending order.")
+            self.success_flag+=1
         except AssertionError as ae:
             print(f"Test failed: {ae}")
         except Exception as e:
@@ -66,6 +71,7 @@ class SortingTests(unittest.TestCase):
             price_list = self.helper.get_inventory_prices()
             sorted_low_to_high_prices = sorted(price_list)
             self.assertEqual(price_list, sorted_low_to_high_prices, "SortTest Failed:The items are not sorted low to high by price")
+            self.success_flag+=1
         except AssertionError as ae:
             print(f"Test failed: {ae}")
         except Exception as e:
@@ -78,6 +84,7 @@ class SortingTests(unittest.TestCase):
             price_list = self.helper.get_inventory_prices()
             sorted_high_to_low_prices = sorted(price_list, reverse=True)
             self.assertEqual(price_list, sorted_high_to_low_prices, "SortTest Failed:The items are not sorted high to low by price")
+            self.success_flag+=1
         except AssertionError as ae:
             print(f"Test failed: {ae}")
         except Exception as e:

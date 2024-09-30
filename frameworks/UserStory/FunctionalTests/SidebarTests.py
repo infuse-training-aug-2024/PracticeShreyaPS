@@ -17,6 +17,7 @@ class SidebarTests(unittest.TestCase):
     USERNAME='standard_user'
     PASSWORD='secret_sauce'
     WAIT_TIME=10
+    success_flag=0
 
     @classmethod
     def setUpClass(cls):
