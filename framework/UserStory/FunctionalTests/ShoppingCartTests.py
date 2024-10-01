@@ -66,9 +66,9 @@ class ShoppingCartTests(unittest.TestCase):
             self.helper.remove_from_cart('remove-sauce-labs-backpack')
             self.success_flag+=1
         except AssertionError as ae:
-            print(f"Assertion error: {ae}")
+            print(f"error in shopping cart update")
         except Exception as e:
-            print(f"Error occurred in counting or checking cart items: {e}")
+            print(f"Error occurred in counting or checking cart items")
 
     def test_cart_persistence(self):
         try:
@@ -85,9 +85,9 @@ class ShoppingCartTests(unittest.TestCase):
             self.success_flag+=1
 
         except AssertionError as ae:
-            print(f"Shopping cart Test Failed: cart icon history didn't persist: {ae}")
+            print(f"Shopping cart Test Failed: cart icon history didn't persist:")
         except Exception as e:
-            print(f"Error in cart persistence test: {e}")
+            print(f"Error in cart persistence test")
 
     def test_removal_from_cart(self):
         try:
@@ -104,9 +104,9 @@ class ShoppingCartTests(unittest.TestCase):
             self.success_flag+=1
 
         except AssertionError as ae:
-            print(f"Shopping cart Test Failed: {ae}")
+            print(f"Shopping cart Test Failed:{ae}")
         except Exception as e:
-            print(f"An error occurred: {e}")
+            print(f"An error occurred in removal")
 
 
 if __name__ == "__main__":

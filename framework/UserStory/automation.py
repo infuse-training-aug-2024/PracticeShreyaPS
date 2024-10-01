@@ -5,6 +5,8 @@ from FunctionalTests.ShoppingCartTests import ShoppingCartTests
 from FunctionalTests.LoginTests import LoginTests
 from FunctionalTests.CheckoutTests import CheckoutTests
 
+
+# tests separated into functioal tests for modularity
 if __name__ == "__main__":
     suite = unittest.TestSuite()
     suite.addTests(unittest.TestLoader().loadTestsFromTestCase(SortingTests))

@@ -1,13 +1,9 @@
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
-from selenium.common.exceptions import StaleElementReferenceException
 
 class Framework:
     def __init__(self, driver: webdriver, wait_time: int = 10):
@@ -23,24 +19,26 @@ class Framework:
         except Exception as e:
             print(f"Error navigating to page: {e}")
             return None  
-        
+
     #interaction functions----------------------------------------------
+    # def click_element(self, locator):
+    #     try:
+    #         element = self.driver.find_element(*locator)
+    #         element.click()
+    #         return True  
+    #     except Exception as e:
+    #         print(f"Error clicking the element: {e}")
+    #         return False
     def click_element(self, locator):
         try:
-            element = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator))
-            self.driver.execute_script("arguments[0].scrollIntoView(true);", element)
+            # Wait for the element to be clickable
+            element = WebDriverWait(self.driver, 10).until(
+                EC.element_to_be_clickable(locator)
+            )
             element.click()
             return True
-        except StaleElementReferenceException:
-            try:
-                element = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(locator))
-                element.click()
-                return True
-            except Exception as e:
-                print(f"Error clicking the stale element: {e}")
-                return False
         except Exception as e:
-            print(f"Error clicking the element: ")
+            print(f"Error clicking the element: {e}")
             return False
 
     def enter_field(self, locator, text):
@@ -79,7 +77,7 @@ class Framework:
         
     def get_elements(self, locator):
             try:
-                self.wait.until(EC.visibility_of_all_elements_located(locator))
+                self.wait.until(EC.presence_of_element_located(locator))
                 elements = self.driver.find_elements(*locator)
                 return elements
             except TimeoutException:
@@ -174,7 +172,7 @@ class Framework:
         except Exception as e:
             print(f"Error logging out: {e}")
             return False
-        
+
     # Alerts ----------------------------------------------------------
     def get_alert_text(self):
         try:

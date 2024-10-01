@@ -1,4 +1,4 @@
-FROM python:3.9-slim
+FROM python
  
 WORKDIR /app
  
@@ -7,7 +7,7 @@ COPY requirements.txt /app
 COPY . /app
  
 RUN pip install --upgrade pip \
-    && pip install selenium testresources
+    && pip install -r requirements.txt
  
 ENV CHROMEDRIVER_VERSION=129.0.6668.70
 ENV CHROMEDRIVER_DIR=/app/chromedriver
@@ -28,4 +28,4 @@ RUN curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-ke
     && apt-get update && apt-get install -y google-chrome-stable \
     && rm -rf /var/lib/apt/lists/*
  
-CMD ["python", "automation.py"]
+CMD ["python", "test_frameworks.py"]
