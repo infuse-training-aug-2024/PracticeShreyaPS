@@ -7,3 +7,7 @@ FOR FRAMEWORK TESTING:
 FOR USERSTORY TESTING:
 
 1. To run from docker : docker run -it automation
+
+For RUNNING DOCKER IMAGES
+1.for test framework: docker run first_stage_image 
+2.for automation: docker run second_stage_image
