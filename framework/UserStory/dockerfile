@@ -1,0 +1,49 @@
+# First Stage: Setup Environment and Dependencies
+FROM python:3.9-slim AS base
+
+WORKDIR /app
+
+COPY requirements.txt /app
+COPY . /app
+
+# Install dependencies for the project
+RUN pip install --upgrade pip \
+    && pip install testresources \
+    && pip install --no-cache-dir -r requirements.txt
+
+# Setup ChromeDriver environment
+ENV CHROMEDRIVER_VERSION=129.0.6668.70
+ENV CHROMEDRIVER_DIR=/app/chromedriver
+
+RUN mkdir -p /app/driver
+
+# Install necessary tools and ChromeDriver
+RUN apt-get update && apt-get install -y unzip curl gnupg2 ca-certificates && rm -rf /var/lib/apt/lists/*
+RUN curl -sS -o /app/driver/chromedriver_linux64.zip https://storage.googleapis.com/chrome-for-testing-public/${CHROMEDRIVER_VERSION}/linux64/chromedriver-linux64.zip
+RUN unzip /app/driver/chromedriver_linux64.zip -d /app/driver
+RUN rm /app/driver/chromedriver_linux64.zip
+
+# Make ChromeDriver executable
+RUN chmod +x /app/driver/chromedriver-linux64/chromedriver
+
+# Install Google Chrome stable version using a proper method to add the GPG key
+RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /usr/share/keyrings/google-chrome-keyring.gpg \
+    && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | tee /etc/apt/sources.list.d/google-chrome.list \
+    && apt-get update && apt-get install -y google-chrome-stable \
+    && rm -rf /var/lib/apt/lists/*
+
+# Second Stage: Running first script (test_frameworks.py)
+FROM base AS stage_one
+
+WORKDIR /app
+
+# Use the prepared environment to run the first command/script
+CMD ["python", "test_frameworks.py"]
+
+# Third Stage: Running second script (automation.py)
+FROM base AS stage_two
+
+WORKDIR /app
+
+# Use the prepared environment to run the second command/script
+CMD ["python", "automation.py"]

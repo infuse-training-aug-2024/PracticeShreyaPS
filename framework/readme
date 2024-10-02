@@ -1,0 +1,13 @@
+FOR FRAMEWORK TESTING:
+
+1. To find coverage : coverage run -m unittest test_frameworks.py
+2. To generate coverage reprt : coverage report /coverage html
+3. To run from docker : docker run -it test
+
+FOR USERSTORY TESTING:
+
+1. To run from docker : docker run -it automation
+
+For RUNNING DOCKER IMAGES
+1.for test framework: docker run first_stage_image 
+2.for automation: docker run second_stage_image
