@@ -8,7 +8,7 @@ COPY . /app
 
 # Install dependencies for the project
 RUN pip install --upgrade pip \
-    && pip install selenium testresources \
+    && pip install testresources \
     && pip install --no-cache-dir -r requirements.txt
 
 # Setup ChromeDriver environment
