@@ -4,13 +4,7 @@ from dotenv import load_dotenv
 import os
 
 class AzureBlobManager:
-    def __init__(self, account_name, account_key):
-        connection_string = (
-            f"DefaultEndpointsProtocol=https;"
-            f"AccountName={account_name};"
-            f"AccountKey={account_key};"
-            f"EndpointSuffix=core.windows.net"
-        )
+    def __init__(self, connection_string):
         self.blob_service_client = BlobServiceClient.from_connection_string(connection_string)
 
     def create_container(self, container_name):
@@ -76,8 +70,7 @@ class AzureBlobManager:
 
 def main():
     load_dotenv()
-    account_name = os.getenv("AZURE_ACCOUNT_NAME")
-    account_key = os.getenv("AZURE_ACCOUNT_KEY")
+    connection_string = os.getenv("CONNECTION_STRING")
     container_name = "pythoncontainer"
     text_blob_name = "myblob.txt"
     image_blob_name = "pic"
@@ -86,7 +79,7 @@ def main():
     local_img_path = 'C:/Users/shreya.sawant/Pictures/Screenshots/Screenshot (13).png'
     metadata = {"author": "Shreya", "description": "Sample blob for Azure demo"}
 
-    azure_manager = AzureBlobManager(account_name, account_key)
+    azure_manager = AzureBlobManager(connection_string)
     azure_manager.create_container(container_name)
     azure_manager.upload_blob(container_name, text_blob_name, text_blob_content)
     azure_manager.upload_image_blob(container_name, image_blob_name, local_img_path)
