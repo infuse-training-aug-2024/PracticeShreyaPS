@@ -102,8 +102,8 @@ class AzureFileShareManager:
 
 def main():
     load_dotenv()
-    connection_string = os.getenv("FILE_CONNECTION_STRING")
-    share_name = "myfilesshare"
+    connection_string = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
+    share_name = "myfilesshare2"
     dir_name = "folder1"
     dest_file_path = "folder1/downloaded_file.txt"
     local_file_path = 'C:/Users/shreya.sawant/Desktop/index.txt'

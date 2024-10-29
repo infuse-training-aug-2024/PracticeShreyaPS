@@ -3,6 +3,7 @@ import uuid
 from azure.identity import DefaultAzureCredential
 from azure.storage.queue import QueueClient, BinaryBase64DecodePolicy, BinaryBase64EncodePolicy
 from dotenv import load_dotenv
+import json
 
 class AzureQueueManager:
     def __init__(self, connection_string):
@@ -20,7 +21,9 @@ class AzureQueueManager:
 
     def send_message(self, queue_client, message):
         try:
-            response = queue_client.send_message(message)
+            object={"name":"shreya","age":"22"}
+            json_message = json.dumps(object)
+            response = queue_client.send_message(json_message)
             print(f"Message '{message}' sent successfully.")
             return response
         except Exception as ex:
@@ -40,10 +43,31 @@ class AzureQueueManager:
             messages = queue_client.receive_messages(max_messages=max_messages,visibility_timeout=30)
             for msg in messages:
                 print(f"Received Message: {msg.content}")
-                queue_client.delete_message(msg)
+                #queue_client.delete_message(msg)
             return messages
         except Exception as ex:
             print(f"Exception during receiving messages: {ex}")
+
+
+
+    def receive_json(self, queue_client, max_messages=5):
+        try:
+            messages = queue_client.receive_messages(max_messages=max_messages, visibility_timeout=30)
+            for msg in messages:
+                try:
+                    msg_content = json.loads(msg.content)
+                    print(f"Received Message: {msg_content}")
+                    print(f"Name: {msg_content.get('name')}")
+                    print(f"Age: {msg_content.get('age')}")
+
+                except json.JSONDecodeError as json_ex:
+                    print(f"Failed to decode JSON message: {json_ex}")
+
+            return messages
+
+        except Exception as ex:
+            print(f"Exception during receiving messages: {ex}")
+
 
 def main():
     load_dotenv()  
@@ -52,7 +76,7 @@ def main():
         print("Azure Storage connection string not found. Please check your environment variables.")
         return
     azure_manager = AzureQueueManager(connection_string)
-    queue_name = f"queue-{uuid.uuid4()}"
+    queue_name = f"queue11-{uuid.uuid4()}"
     queue_client = azure_manager.create_queue(queue_name)
     if not queue_client:
         return  
@@ -62,7 +86,7 @@ def main():
     print("\nPeeking at messages in the queue...")
     azure_manager.peek_messages(queue_client)
     print("\nReceiving messages from the queue...")
-    azure_manager.receive_messages(queue_client)
+    azure_manager.receive_json(queue_client)
     azure_manager.peek_messages(queue_client)
     azure_manager.send_message(queue_client, "after 1 to 3 are recieved message")
     azure_manager.peek_messages(queue_client)

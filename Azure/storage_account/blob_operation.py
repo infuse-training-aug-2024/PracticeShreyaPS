@@ -70,8 +70,8 @@ class AzureBlobManager:
 
 def main():
     load_dotenv()
-    connection_string = os.getenv("CONNECTION_STRING")
-    container_name = "pythoncontainer"
+    connection_string = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
+    container_name = "pythoncontainer2"
     text_blob_name = "myblob.txt"
     image_blob_name = "pic"
     text_blob_content = b"Hello, this is a sample blob!"
