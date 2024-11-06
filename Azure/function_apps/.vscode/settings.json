@@ -1,5 +1,5 @@
 {
-    "azureFunctions.deploySubpath": "table_http_trigger",
+    "azureFunctions.deploySubpath": "blob-trigger",
     "azureFunctions.scmDoBuildDuringDeployment": true,
     "azureFunctions.projectLanguage": "Python",
     "azureFunctions.projectRuntime": "~4",
