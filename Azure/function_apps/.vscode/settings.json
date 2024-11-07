@@ -1,9 +1,10 @@
 {
-    "azureFunctions.deploySubpath": "blob-trigger",
+    "azureFunctions.deploySubpath": "outputbinding",
     "azureFunctions.scmDoBuildDuringDeployment": true,
     "azureFunctions.projectLanguage": "Python",
     "azureFunctions.projectRuntime": "~4",
     "debug.internalConsoleOptions": "neverOpen",
     "azureFunctions.projectLanguageModel": 2,
-    "azureFunctions.pythonVenv": ".venv"
+    "azureFunctions.pythonVenv": ".venv",
+    "azureFunctions.projectSubpath": "blob-trigger"
 }
