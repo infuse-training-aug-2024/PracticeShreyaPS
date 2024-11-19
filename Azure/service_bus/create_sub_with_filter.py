@@ -10,8 +10,9 @@ topic_name = os.getenv("TOPIC_NAME")
 # Create a ServiceBusAdministrationClient instance
 admin_client = ServiceBusAdministrationClient.from_connection_string(connection_string)
 
-# Create a subscription with a SQL filter (color='blue' AND quantity=10)
+# # Create a subscription with a SQL filter (color='blue' AND quantity=10)
 subscription_name1 = "ColorBlueSize10Orders"
+admin_client.delete_rule(topic_name, subscription_name1, "$Default")
 sql_filter1 = SqlRuleFilter("color = 'blue' AND quantity = 10")
 admin_client.create_subscription(topic_name, subscription_name1)
 admin_client.create_rule(
@@ -23,8 +24,9 @@ admin_client.create_rule(
 
 # Create a rule with a SQL filter (color='red') and an action to modify quantity
 subscription_name2 = "ColorRedOrders"
-sql_filter2 = SqlRuleFilter("user.color = 'red'")
-sql_action2 = SqlRuleAction("SET quantity = quantity / 2;")
+admin_client.delete_rule(topic_name, subscription_name2, "$Default")
+sql_filter2 = SqlRuleFilter("color = 'red'")
+sql_action2 = SqlRuleAction("SET quantity = 100")
 admin_client.create_subscription(topic_name, subscription_name2)
 admin_client.create_rule(
     topic_name=topic_name,

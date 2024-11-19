@@ -4,19 +4,27 @@ import os
 from azure.servicebus.aio import ServiceBusClient
 from azure.servicebus import ServiceBusMessage
 
-async def send_single_pass_message(sender):
+async def send_blue_msg(sender):
     # Create a Service Bus message
-    message = ServiceBusMessage("Single-pass msg",subject="single-pass")
+    message = ServiceBusMessage("blue10 msg",application_properties={"color": "blue", "quantity":10})
     # send the message to the topic
     await sender.send_messages(message)
     print("Sent a single message")
 
-async def send_double_pass_message(sender):
+async def send_red_msg(sender):
     # Create a Service Bus message
-    message = ServiceBusMessage("double-pass msg",subject="double-pass")
+    message = ServiceBusMessage("red msg",application_properties={"color": "red"})
     # send the message to the topic
     await sender.send_messages(message)
     print("Sent a single message")
+
+async def send_single_pass_msg(sender):
+    # Create a Service Bus message
+    message = ServiceBusMessage("single pass msg",subject="single-pass")
+    # send the message to the topic
+    await sender.send_messages(message)
+    print("Sent a single message")
+
 
 async def run():
     load_dotenv()
@@ -28,8 +36,9 @@ async def run():
         sender = servicebus_client.get_topic_sender(topic_name=os.getenv("TOPIC_NAME"))
         async with sender:
             # Send one message
-            await send_single_pass_message(sender)
-            await send_double_pass_message(sender)
+            await send_blue_msg(sender)
+            await send_red_msg(sender)
+            await send_single_pass_msg(sender)
 
 asyncio.run(run())
 print("Done sending messages")
