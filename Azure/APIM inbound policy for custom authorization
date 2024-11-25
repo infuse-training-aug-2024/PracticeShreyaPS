@@ -1,0 +1,86 @@
+<policies>
+    <inbound>
+        <base />
+        <!-- Send token validation request -->
+        <send-request mode="new" response-variable-name="tokenValidationResponse" timeout="20" ignore-error="true">
+            <set-url>@{
+                return "https://apim-funcapp-shreya.azurewebsites.net/api/tokenvalidity?subscription-key=147ceb73f72d4d21963126bb0f1c98e0";
+            }</set-url>
+            <set-method>POST</set-method>
+            <set-header name="Content-Type" exists-action="override">
+                <value>application/json</value>
+            </set-header>
+            <set-header name="Authorization" exists-action="override">
+                <value>@(context.Request.Headers.GetValueOrDefault("Authorization", ""))</value>
+            </set-header>
+            <set-body>@{
+                var token = context.Request.Headers.GetValueOrDefault("Authorization", "")
+                    .Replace("Bearer ", "").Trim();
+                return new JObject(
+                    new JProperty("token", token),
+                    new JProperty("type", "Bearer")
+                ).ToString();
+            }</set-body>
+        </send-request>
+        <!-- Handle token validation response -->
+        <choose>
+            <when condition="@(context.Variables.GetValueOrDefault<IResponse>("tokenValidationResponse")?.StatusCode == 200)">
+                <set-body>@{
+                    try {
+                        var requestBody = context.Request.Body?.As<string>();
+                        if (string.IsNullOrEmpty(requestBody)) {
+                            return new JObject(
+                                new JProperty("status", "success"),
+                                new JProperty("message", "Token validated successfully")
+                            ).ToString();
+                        }
+                        return requestBody;
+                    }
+                    catch {
+                        return new JObject(
+                            new JProperty("status", "success"),
+                            new JProperty("message", "Token validated successfully")
+                        ).ToString();
+                    }
+                }</set-body>
+            </when>
+            <otherwise>
+                <return-response>
+                    <set-status code="401" reason="Unauthorized" />
+                    <set-header name="Content-Type" exists-action="override">
+                        <value>application/json</value>
+                    </set-header>
+                    <set-body>@{
+                        var response = context.Variables.GetValueOrDefault<IResponse>("tokenValidationResponse");
+                        return response?.Body?.As<string>() ?? new JObject(
+                            new JProperty("statusCode", 401),
+                            new JProperty("message", "Token validation failed")
+                        ).ToString();
+                    }</set-body>
+                </return-response>
+            </otherwise>
+        </choose>
+        <return-response>
+            <set-status code="200" reason="OK" />
+            <set-header name="Content-Type" exists-action="override">
+                <value>application/json</value>
+            </set-header>
+            <set-body>@{
+                var response = context.Variables.GetValueOrDefault<IResponse>("tokenValidationResponse");
+                return response?.Body?.As<string>() ?? new JObject(
+                    new JProperty("status", "success"),
+                    new JProperty("message", "Token validated successfully")
+                ).ToString();
+            }</set-body>
+        </return-response>
+    </inbound>
+    <backend>
+        <base />
+    </backend>
+    <outbound>
+        <base />
+    </outbound>
+    <on-error>
+        <base />
+    </on-error>
+</policies>
